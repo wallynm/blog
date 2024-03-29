@@ -8,6 +8,8 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { siteTitle, siteURL } from '$lib/config.js';
+	import mixpanel from 'mixpanel-browser';
+  
 	export let data;
 
 	const transitionIn = { delay: 150, duration: 150 };
@@ -27,6 +29,7 @@
 	 * own preloadData() calls here, too.
 	 **/
 	onMount(() => {
+		mixpanel.init('282d4cca7905578d99de00196ed79943', {debug: true, track_pageview: true, persistence: 'localStorage'});
 		const navRoutes = navItems.map((item) => item.route);
 		preloadCode(...navRoutes);
 	});

@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"image-transmutation": "^0.1.3",
+		"mixpanel-browser": "^2.49.0",
 		"rehype-external-links": "^3.0.0"
 	}
 }
