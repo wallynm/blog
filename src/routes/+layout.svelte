@@ -2,13 +2,14 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
+	import mixpanel from 'mixpanel-browser';
 	import { navItems } from '$lib/config';
 	import { preloadCode } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
 	import { siteTitle, siteURL } from '$lib/config.js';
-	import mixpanel from 'mixpanel-browser';
+	import "../app.css";
   
 	export let data;
 

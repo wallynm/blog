@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-static'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeExternalLinks from 'rehype-external-links';
@@ -10,6 +11,7 @@ const config = {
 	extensions: ['.svelte', '.md'],
 
 	preprocess: [
+		vitePreprocess(),
 		mdsvex({
 			// The default mdsvex extension is .svx; this overrides that.
 			extensions: ['.md'],
