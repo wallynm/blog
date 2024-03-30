@@ -1,5 +1,5 @@
 <!-- This is the global layout file; it "wraps" every page on the site. (Or more accurately: is the parent component to every page component on the site.) -->
-<script>
+<script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import mixpanel from 'mixpanel-browser';
@@ -10,8 +10,10 @@
 	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
 	import { siteTitle, siteURL } from '$lib/config.js';
 	import "../app.css";
-  
-	export let data;
+	import type { LayoutData } from './$types';
+
+	export let data: LayoutData;
+
 
 	const transitionIn = { delay: 150, duration: 150 };
 	const transitionOut = { duration: 100 };

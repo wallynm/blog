@@ -14,7 +14,7 @@
 		"src/**/*.d.ts",
 		"src/**/*.js",
 		"src/**/*.svelte"
-	]
+, "src/routes/+page.server.ts", "src/routes/api/posts.json/+server.ts", "src/lib/assets/js/fetchPosts.ts", "src/routes/blog/page/+page.server.ts", "src/routes/blog/+page.server.ts"	]
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias and https://kit.svelte.dev/docs/configuration#files
 	//
 	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes

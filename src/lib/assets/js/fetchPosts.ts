@@ -1,6 +1,16 @@
 import { postsPerPage } from '$lib/config'
 
-const fetchPosts = async ({ offset = 0, limit = postsPerPage, category = '' } = {}) => {
+interface fetchPostsInterface {
+	offset?: string | number
+	limit?: string | number
+	category?: string
+}
+
+const fetchPosts = async ({
+	offset = 0,
+	limit = postsPerPage,
+	category = ''
+}:fetchPostsInterface = {}) => {
 
 	const posts = await Promise.all(
 		Object.entries(import.meta.glob('/src/lib/posts/*.md')).map(async ([path, resolver]) => {
