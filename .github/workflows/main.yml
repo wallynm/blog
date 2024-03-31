@@ -16,14 +16,14 @@ jobs:
         with:
           version: 8
 
-      - name: Running Page Speed Insights
-        uses: jakepartusch/psi-action@v1.3
-        id: psi
-        with:
-          url: "https://wallynm.dev"
-          threshold: 70
-          strategy: mobile
-          key: ${{ secrets.APIKEY_GOOGLE }}
+      # - name: Running Page Speed Insights
+      #   uses: jakepartusch/psi-action@v1.3
+      #   id: psi
+      #   with:
+      #     url: "https://wallynm.dev"
+      #     threshold: 70
+      #     strategy: mobile
+      #     key: ${{ secrets.APIKEY_GOOGE }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
