@@ -1,7 +1,7 @@
 header,
 footer {
 	font-family: var(--primaryFont);
-	padding: 2.5rem 2rem;
+	/* padding: 2.5rem 2rem; */
 }
 
 :where(header, footer) a {
@@ -30,13 +30,13 @@ footer {
 	fill: currentColor;
 }
 
-header {
+/* header {
 	background: var(--lightAccent);
 	color: var(--darker);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
+} */
 
 @media (min-width: 48rem) {
 	header {
@@ -46,27 +46,11 @@ header {
 	}
 }
 
-.site-title {
-	font-family: var(--accentFont);
-	font-size: 2.1rem;
-	line-height: 1;
-	color: inherit;
-	text-align: center;
-	margin: 0;
-	display: block;
-	font-size: 1.4rem;
-	font-weight: bold;
-
-	@media (min-width: 48rem) {
-		width: 100%;
-		font-size: 1.6rem;
-	}
-}
-
 .menu-button {
 	margin: 0;
 	background: transparent !important;
 	color: inherit;
+	color: red;
 	padding: 0;
 	border: 0;
 	width: 2rem;

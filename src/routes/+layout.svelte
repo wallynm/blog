@@ -39,24 +39,7 @@
 </script>
 
 <svelte:head>
-	<link rel="stylesheet" href="/css/vars.css" />
-	<link rel="stylesheet" href="/css/root.css" />
-	<link rel="stylesheet" href="/css/fonts.css" />
-	<link rel="stylesheet" href="/css/typography.css" />
-	<link rel="stylesheet" href="/css/layout.css" />
-	<link rel="stylesheet" href="/css/components.css" />
-	<link rel="stylesheet" href="/css/header-and-footer.css" />
-	<link rel="stylesheet" href="/css/forms.css" />
-	<link rel="stylesheet" href="/css/animation.css" />
-	<link rel="stylesheet" href="/css/utilities.css" />
-	<link rel="stylesheet" href="/css/code.css" />
-	<link rel="stylesheet" href="/css/prism.css" />
-	<link
-		rel="alternate"
-		type="application/rss+xml"
-		title={siteTitle}
-		href="http://{siteURL}/api/rss.xml"
-	/>
+	
 </svelte:head>
 
 <!--
@@ -64,11 +47,13 @@
 	actual contents will show up.
 -->
 <div class="layout" class:open={$isMenuOpen}>
-	<Header />
-	{#key data.path}
-		<main id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
-			<slot />
-		</main>
-	{/key}
-	<Footer />
+	<Header class="container px-5 py-12 mx-auto"/>
+	<section class="container px-5 py-12 mx-auto">
+		{#key data.path}
+			<main id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
+				<slot class="test"/>
+			</main>
+		{/key}
+	</section>
+	<Footer class="p-10"/>
 </div>

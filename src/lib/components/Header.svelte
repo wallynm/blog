@@ -10,12 +10,12 @@
 </script>
 
 
-<header>
+<header class="{$$restProps.class || ''}">
 	<a on:click|preventDefault={focusMain} class="skip-to-content-link" href="#main">
 		Skip to main content
 	</a>
 	
-	<a href="/" class="site-title">
+	<a href="/" class="text-4xl color-slate-900">
 		{siteTitle}
 	</a>
 	
