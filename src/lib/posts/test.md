@@ -1,3 +1,15 @@
+---
+title: "Test"
+date: "2023-01-05"
+updated: "2023-01-05"
+categories:
+  - "test"
+coverImage: "/images/linus-nylund-Q5QspluNZmM-unsplash.jpg"
+coverWidth: 16
+coverHeight: 9
+excerpt: This post shows you how syntax highlighting works here.
+---
+
 In 2018, Dropbox became the first major tech company to adopt high-density SMR (shingled magnetic recording) technology for our storage drives. By 2019, our SMR fleet size was around 25%. Today, a staggering 90% of our total HDD fleet size is now SMR capable, and we’ve continued to lead the industry in adoption with the deployment of two additional SMR hard drive models. 
 
 SMR technology has reduced the power requirements of our storage servers, lowered the cost of each exabyte, and enabled more efficient server rack designs. The work that we’ve done and the lessons we’ve learned have helped raise the bar for everyone in the industry using SMR drives. 

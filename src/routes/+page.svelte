@@ -26,7 +26,7 @@
 {/if} -->
 
 
-<!-- TODO: this is duplicated across multiple `+page.svelte` files -->
+TODO: this is duplicated across multiple `+page.svelte` files
 {#if data.posts?.length}
 	<!-- <h1>Posts {total}–{upperBound} of {total}</h1> -->
 	<!-- <Pagination currentPage={page} {total} /> -->

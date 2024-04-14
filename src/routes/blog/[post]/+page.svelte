@@ -1,5 +1,6 @@
 <!-- This file renders each individual blog post for reading. Be sure to update the svelte:head below -->
 <script>
+	import CategoriesPostList from "$lib/components/categories/CategoriesPostList.svelte";
 	export let data;
 
 	const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
@@ -45,18 +46,5 @@
 
 	<svelte:component this={PostContent} />
 
-	{#if categories}
-		<aside class="post-footer">
-			<h2>Posted in:</h2>
-			<ul class="post-footer__categories">
-				{#each categories as category}
-					<li>
-						<a href="/blog/category/{category}/">
-							{category}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</aside>
-	{/if}
+	<CategoriesPostList categories={categories} />
 </article>
