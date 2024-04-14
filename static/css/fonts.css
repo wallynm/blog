@@ -1,151 +1,68 @@
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Regular-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: normal;
-	font-style: normal;
-}
 
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Italic-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: normal;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Bold-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: bold;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-BoldItalic-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: bold;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: "Fira Code";
-	src: url('/fonts/FiraCode-Regular.woff2'), format('woff2');
-	font-display: swap;
-	font-style: normal;
-	font-weight: normal;
-}
-
-
-
-
-
-.kanit-thin {
-  font-family: "Kanit", sans-serif;
+.jetbrains-mono-light {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
 }
 
-.kanit-extralight {
-  font-family: "Kanit", sans-serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.kanit-light {
-  font-family: "Kanit", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.kanit-regular {
-  font-family: "Kanit", sans-serif;
+.jetbrains-mono-regular {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-.kanit-medium {
-  font-family: "Kanit", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.kanit-semibold {
-  font-family: "Kanit", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.kanit-bold {
-  font-family: "Kanit", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.kanit-extrabold {
-  font-family: "Kanit", sans-serif;
+.jetbrains-mono-bold {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
 }
 
-.kanit-black {
-  font-family: "Kanit", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
 
-.kanit-thin-italic {
-  font-family: "Kanit", sans-serif;
+.work-sans-light {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 100;
-  font-style: italic;
+  font-style: normal;
 }
 
-.kanit-extralight-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 200;
-  font-style: italic;
-}
 
-.kanit-light-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.kanit-regular-italic {
-  font-family: "Kanit", sans-serif;
+.work-sans-regular {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
 }
 
-.kanit-medium-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
 
-.kanit-semibold-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
-.kanit-bold-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.kanit-extrabold-italic {
-  font-family: "Kanit", sans-serif;
+.work-sans-bold {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 800;
-  font-style: italic;
+  font-style: normal;
 }
 
-.kanit-black-italic {
-  font-family: "Kanit", sans-serif;
-  font-weight: 900;
-  font-style: italic;
+.quicksand-sans-light {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+.quicksand-sans-regular {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.quicksand-sans-bold {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
 }

@@ -17,7 +17,7 @@
 	 * These fonts are broken out into two separate variables from a previous iteration. I left
 	 * it in because it's nice to be able to split out the heading and body fonts.
 	 */
-	--accentFont: Kanit, Tahoma, 'Atkinson Hyperlegible', Georgia, Times, serif;
-	--primaryFont: Kanit, Tahoma, 'Atkinson Hyperlegible', sans-serif;
-	--codeFont: 'Fira Code', monospace;
+	--accentFont: "Quicksand", Tahoma, 'Atkinson Hyperlegible', Georgia, Times, serif;
+	--primaryFont: "Work Sans", Tahoma, 'Atkinson Hyperlegible', sans-serif;
+	--codeFont: "JetBrains Mono", monospace;
 }
