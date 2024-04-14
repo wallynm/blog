@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { postsPerPage } from '$lib/config'
 
-	export let currentPage
+	export let currentPage:number;
 	export let totalPosts
 	export let path = '/blog/page'
 	
-	let pagesAvailable
+	let pagesAvailable:number;
 	$: pagesAvailable = Math.ceil(totalPosts / postsPerPage)
 
 	const isCurrentPage = (page) => page == currentPage

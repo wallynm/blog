@@ -1,6 +1,7 @@
 <script>
 	import MainNav from './MainNav.svelte'
 	import HamburgerMenuButton from './HamburgerMenuButton.svelte'
+	import ThemeSwitch from './header/ThemeSwitch.svelte'
 	import { siteTitle } from '$lib/config'
 
 	const focusMain = () => {
@@ -15,10 +16,12 @@
 		Skip to main content
 	</a>
 	
-	<a href="/" class="text-4xl color-slate-900">
+	<a href="/" class="text-4xl dark:text-slate-100 dark:font-bold text-slate-900">
 		{siteTitle}
 	</a>
 	
+
+	<ThemeSwitch />
 	<HamburgerMenuButton />
 	<MainNav />
 

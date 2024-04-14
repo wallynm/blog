@@ -6,7 +6,7 @@
   <ul class="{$$restProps.class || ''} flex md:inline-flex list-disc">
     {#each categories as category}
       <li class="mx-3">
-        <a href="/blog/category/{category}/">
+        <a class="hover:underline" href="/blog/category/{category}/">
           {category}
         </a>
       </li>

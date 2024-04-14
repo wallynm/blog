@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/favicon.png" />
@@ -25,12 +25,24 @@
 			title={siteTitle}
 			href="http://{siteURL}/api/rss.xml"
 		/>
-
+		<script>
+			window.changeThemeMode = function(theme) {
+				if (theme === 'dark' || (!('theme' in localStorage) &&
+						window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			}
+	
+			window.changeThemeMode(localStorage.getItem('theme'))
+		</script>
+		
 
 		%sveltekit.head%
 		<!-- You can add global <meta> tags here, but anything not global or dynamic should be a `<svelte:head>` tag on the proper page(s) instead. -->
 	</head>
-	<body class="text-stone-200">
+	<body class="text-stone-200 bg-slate-200 dark:bg-slate-900">
 		<div id="svelte">%sveltekit.body%</div>
 	</body>
 </html>

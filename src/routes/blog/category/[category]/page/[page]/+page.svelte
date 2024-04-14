@@ -25,7 +25,7 @@
 		<br />
 		<small>Posts {lowerBound}–{upperBound} of {totalPosts}</small>
 	</h1>
-	<Pagination currentPage={page} {totalPosts} path="/blog/category/{category}/page" />
+	<!-- <Pagination currentPage={page} {totalPosts} path="/blog/category/{category}/page" /> -->
 
 	<PostsList {posts} />
 
