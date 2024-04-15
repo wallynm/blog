@@ -41,14 +41,14 @@
 <svelte:head>
 </svelte:head>
 
-<div class="layout" class:open={$isMenuOpen}>
-	<Header class="container px-5 py-12 mx-auto"/>
-	<section class="container px-5 py-12 mx-auto">
+<div class="min-h-screen flex flex-col" class:open={$isMenuOpen}>
+	<Header class=""/>
+	<section class="items-center justify-center flex flex-col ">
 		{#key data.path}
-			<main id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
+			<main class="container max-w-xl max-xl p-5 mt-20 sm:px-0" id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
 				<slot class="test"/>
 			</main>
 		{/key}
 	</section>
-	<Footer class="p-10"/>
+	<Footer class="p-10  mt-auto border-t border-gray-200"/>
 </div>

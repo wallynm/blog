@@ -4,8 +4,7 @@
 	export let posts = []
 </script>
 
-<section class="posts-list body-font overflow-hidden text-gray-500 dark:text-slate-100
-text-gray-500 dark:text-slate-100">
+<section class="posts-list body-font overflow-hidden">
 	{#each posts as post}
 		<div class=" divide-y-2 divide-gray-100">
 			<div class="py-8 flex flex-wrap md:flex-nowrap">
