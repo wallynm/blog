@@ -33,14 +33,14 @@
 		if(currentPage < pagesAvailable) {
 			return `${path}/${currentPage + 1}`
 		}
-		return '#!'
+		return '#'
 	}
 
 	const getPrevPageLink = () => {
 		if(currentPage > 1) {
 			return `${path}/${currentPage - 1}`
 		}
-		return '#!'
+		return '#'
 	}
 </script>
 
