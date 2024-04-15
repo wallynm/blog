@@ -43,12 +43,12 @@
 
 <div class="min-h-screen flex flex-col" class:open={$isMenuOpen}>
 	<Header class=""/>
-	<section class="items-center justify-center flex flex-col ">
+	<section>
 		{#key data.path}
-			<main class="container max-w-xl max-xl p-5 mt-20 sm:px-0" id="main" tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
-				<slot class="test"/>
+			<main id="main" class="items-center justify-center flex flex-col " tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
+				<slot/>
 			</main>
 		{/key}
 	</section>
-	<Footer class="p-10  mt-auto border-t border-gray-200"/>
+	<Footer class="p-10 mt-auto border-t border-gray-200"/>
 </div>
