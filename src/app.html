@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Quicksand:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/base.css" />
+		<link rel="stylesheet" href="/css/vars.css" />
+		<link rel="stylesheet" href="/css/fonts.css" />
+		<link rel="stylesheet" href="/css/typography.css" />
+		<link rel="stylesheet" href="/css/layout.css" />
+		<link rel="stylesheet" href="/css/components.css" />
+		<link rel="stylesheet" href="/css/header-and-footer.css" />
+		<link rel="stylesheet" href="/css/forms.css" />
+		<link rel="stylesheet" href="/css/animation.css" />
+		<link rel="stylesheet" href="/css/utilities.css" />
+		<link rel="stylesheet" href="/css/code.css" />
+		<link rel="stylesheet" href="/css/prism.css" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={siteTitle}
+			href="http://{siteURL}/api/rss.xml"
+		/>
+		<script>
+			window.changeThemeMode = function(theme) {
+				if (theme === 'dark' || (!('theme' in localStorage) &&
+						window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			}
+	
+			window.changeThemeMode(localStorage.getItem('theme'))
+		</script>
+		
 
 		%sveltekit.head%
 		<!-- You can add global <meta> tags here, but anything not global or dynamic should be a `<svelte:head>` tag on the proper page(s) instead. -->
 	</head>
-	<body>
+	<body class="bg-slate-200 dark:bg-slate-900 text-slate-500 dark:text-slate-100">
 		<div id="svelte">%sveltekit.body%</div>
 	</body>
 </html>

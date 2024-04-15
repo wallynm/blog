@@ -1,39 +1,68 @@
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Regular-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: normal;
-	font-style: normal;
+
+.jetbrains-mono-light {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }
 
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Italic-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: normal;
-	font-style: italic;
+.jetbrains-mono-regular {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-Bold-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: bold;
-	font-style: normal;
+.jetbrains-mono-bold {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
 }
 
-@font-face {
-	font-family: "Atkinson Hyperlegible";
-	src: url('/fonts/Atkinson-Hyperlegible-BoldItalic-102a.woff2'), format('woff2');
-	font-display: swap;
-	font-weight: bold;
-	font-style: italic;
+
+.work-sans-light {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }
 
-@font-face {
-	font-family: "Fira Code";
-	src: url('/fonts/FiraCode-Regular.woff2'), format('woff2');
-	font-display: swap;
-	font-style: normal;
-	font-weight: normal;
+
+.work-sans-regular {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.work-sans-bold {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.quicksand-sans-light {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+.quicksand-sans-regular {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.quicksand-sans-bold {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
 }

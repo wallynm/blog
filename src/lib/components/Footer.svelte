@@ -3,7 +3,7 @@
 	import NavItems from './NavItems.svelte';
 </script>
 
-<footer>
+<footer class="{$$restProps.class || ''}">
 	<nav>
 		<ul>
 			<li>

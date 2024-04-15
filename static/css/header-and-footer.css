@@ -1,17 +1,8 @@
 header,
 footer {
 	font-family: var(--primaryFont);
-	padding: 2.5rem 2rem;
+	/* padding: 2.5rem 2rem; */
 }
-
-:where(header, footer) a {
-	text-decoration: none;
-
-	&.active {
-		font-weight: bold;
-	}
-}
-
 :where(header, footer) nav ul {
 	list-style-type: none;
 	display: flex;
@@ -22,44 +13,23 @@ footer {
 	margin: 0;
 }
 
-:where(header, footer) a:hover {
-	text-decoration: underline;
-}
-
 :where(header, footer) svg {
 	fill: currentColor;
 }
 
-header {
+/* header {
 	background: var(--lightAccent);
 	color: var(--darker);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
+} */
 
 @media (min-width: 48rem) {
 	header {
 		justify-content: center;
 		flex-wrap: wrap;
 		height: auto;
-	}
-}
-
-.site-title {
-	font-family: var(--accentFont);
-	font-size: 2.1rem;
-	line-height: 1;
-	color: inherit;
-	text-align: center;
-	margin: 0;
-	display: block;
-	font-size: 1.4rem;
-	font-weight: bold;
-
-	@media (min-width: 48rem) {
-		width: 100%;
-		font-size: 1.6rem;
 	}
 }
 
@@ -110,9 +80,6 @@ header {
 	animation: slide_in_left 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
 }
 
-.main-nav a {
-	color: inherit;
-}
 
 .main-nav li:nth-of-type(1) {
 	animation-delay: calc(var(--delay) * 1);
@@ -211,10 +178,6 @@ footer {
 footer p {
 	margin: 0;
 	font-size: 0.8rem;
-}
-
-footer a {
-	color: inherit;
 }
 
 footer nav {
