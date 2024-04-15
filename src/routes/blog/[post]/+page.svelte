@@ -1,11 +1,14 @@
 <!-- This file renders each individual blog post for reading. Be sure to update the svelte:head below -->
 <script>
+  import { getBackgroundBasedIntoLength } from '$lib/utils/categoryClassName';
 	import CategoriesPostList from "$lib/components/categories/CategoriesPostList.svelte";
 	export let data;
 
 	const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
 		data.meta;
 	const { PostContent } = data;
+
+
 </script>
 
 <svelte:head>
@@ -34,15 +37,13 @@
 		height={coverHeight}
 	/>
 
-	<h1>{title}</h1>
+	<section class="md:-mx-8">
+		<div>
+			<h1 class="inline {getBackgroundBasedIntoLength(categories[0])}">{title}</h1>
+		</div>
+		// Published {date} * Updated {updated}
+	</section>
 
-	<div class="meta">
-		<b>Published:</b>
-		{date}
-		<br />
-		<b>Updated:</b>
-		{updated}
-	</div>
 
 	<svelte:component this={PostContent} />
 
