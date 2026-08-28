@@ -67,6 +67,32 @@ Não liste esses caminhos como globs em `prerender.entries` no `svelte.config.js
 eles seriam tratados como caminhos literais e o build acabaria criando pastas
 chamadas `*`.
 
+## Projetos na home
+
+A home mostra os três primeiros itens de `src/lib/projects.js`:
+
+```js
+{
+	name: 'Cluvia',
+	description: 'Uma linha sobre o projeto.',
+	url: 'https://cluvia.app',   // opcional
+	repo: '',                     // opcional
+	tags: ['svelte', 'cloudflare'],
+	image: '/images/projetos/cluvia.jpg'
+}
+```
+
+Os prints ficam em `static/images/projetos/`. Formato: 16:9, pelo menos 1200px
+de largura, `.jpg` ou `.png`.
+
+Enquanto `image` estiver vazio (ou apontar para um arquivo que não existe), o
+card mostra um placeholder listrado no lugar — dá para publicar um projeto antes
+de ter a captura dele. `description`, `tags`, `url` e `repo` também são
+opcionais: o card só não desenha a parte correspondente.
+
+Quando `url` e `repo` estão preenchidos, o card ganha os dois links no rodapé;
+com só um dos dois, o card inteiro vira o link.
+
 ## Configuração do site
 
 `src/lib/config.js` concentra título, descrição, domínio, autor, posts por
@@ -80,6 +106,7 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 | --- | --- |
 | `src/lib/posts/` | Os posts em Markdown |
 | `src/lib/config.js` | Configuração do site e do menu |
+| `src/lib/projects.js` | Os projetos exibidos na home |
 | `src/lib/assets/js/fetchPosts.ts` | Leitura, ordenação, filtro por categoria e paginação dos posts |
 | `src/lib/components/` | Header, footer, nav, listagem de posts, paginação |
 | `src/routes/` | Páginas e endpoints |
