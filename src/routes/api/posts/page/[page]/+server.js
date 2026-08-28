@@ -4,15 +4,20 @@ import { json } from '@sveltejs/kit'
 
 export const prerender = true
 
-export const GET = async ({ params }) => {
-  const { page } = params || 1
+export const entries = async () => {
+  const { total } = await fetchPosts({ limit: -1 })
+  const pages = Math.max(Math.ceil(total / postsPerPage), 1)
 
-  const options = {
+  return Array.from({ length: pages }, (_, i) => ({ page: String(i + 1) }))
+}
+
+export const GET = async ({ params }) => {
+  const page = parseInt(params.page) || 1
+
+  const { posts } = await fetchPosts({
     offset: (page - 1) * postsPerPage,
     limit: postsPerPage
-  }
+  })
 
-  const { posts } = await fetchPosts(options)
-  
   return json(posts)
 }

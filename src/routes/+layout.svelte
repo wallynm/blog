@@ -8,7 +8,6 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
-	import { siteTitle, siteURL } from '$lib/config.js';
 	import "../app.css";
 	import type { LayoutData } from './$types';
 
@@ -37,9 +36,6 @@
 		preloadCode(...navRoutes);
 	});
 </script>
-
-<svelte:head>
-</svelte:head>
 
 <div class="min-h-screen flex flex-col" class:open={$isMenuOpen}>
 	<Header class=""/>

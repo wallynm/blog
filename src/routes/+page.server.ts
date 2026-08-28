@@ -1,9 +1,7 @@
-import { fetchApiPosts, fetchApiPostsCount } from '$lib/modules/server';
+import fetchPosts from '$lib/assets/js/fetchPosts';
 
-
-export const load = async ({ url, fetch }) => {
-	const posts = await fetchApiPosts({ url, fetch });
-	const total = await fetchApiPostsCount({ url, fetch });
+export const load = async () => {
+	const { posts, total } = await fetchPosts();
 
 	return { posts, total }
 }

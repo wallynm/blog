@@ -1,21 +1,29 @@
+import { error, redirect } from '@sveltejs/kit'
 import { postsPerPage } from '$lib/config'
 import fetchPosts from '$lib/assets/js/fetchPosts'
-import { redirect } from '@sveltejs/kit'
-import { fetchApiPosts, fetchApiPostsCount } from '$lib/modules/server';
 
+// Tells the prerenderer which /blog/page/x routes actually exist.
+export const entries = async () => {
+  const { total } = await fetchPosts({ limit: -1 })
+  const pages = Math.ceil(total / postsPerPage)
 
-export const load = async ({ url, params, fetch }) => {
-  const page = parseInt(params.page) || 1
+  return Array.from({ length: Math.max(pages - 1, 0) }, (_, i) => ({ page: String(i + 2) }))
+}
 
-  // Keeps from duplicationg the blog index route as page 1
-  if (page <= 1) {
+export const load = async ({ params }) => {
+  const page = parseInt(params.page)
+
+  // Keeps from duplicating the blog index route as page 1
+  if (!page || page <= 1) {
     redirect(301, '/blog');
   }
-  
-  let offset = (page * postsPerPage) - postsPerPage
-  
-  const posts = await fetchApiPosts({ url, fetch });
-	const total = await fetchApiPostsCount({ url, fetch, offset, page });
+
+  const offset = (page - 1) * postsPerPage
+  const { posts, total } = await fetchPosts({ offset })
+
+  if (!posts.length) {
+    error(404, `Page ${page} doesn't exist.`)
+  }
 
   return {
     posts,

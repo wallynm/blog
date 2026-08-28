@@ -1,21 +1,15 @@
 <svelte:head>
-	<title>About</title>
+	<title>Sobre</title>
 </svelte:head>
 
-# About
+# Sobre
 
-This is an example of how you can have _markdown_ in page content!
+Olá! Sou o **Wallysson Nunes da Mota**, desenvolvedor de software.
 
-- How
-- **Cool**
-- Is _that_!?
+Este é meu espaço para escrever sobre as coisas em que trabalho e sobre o que
+aprendo no caminho: desenvolvimento web, arquitetura, frontend e ferramentas.
 
-If you like, you can also import markdown into any Svelte page.
+Você pode acompanhar os posts pelo [blog](/blog) ou pelo
+[feed RSS](/api/rss.xml).
 
-Anyway, you can find this file here:
-
-```
-src/routes/about/+page.md
-```
-
-Here's the [home link](/) if you wanna go back.
+Me encontre no [GitHub](https://github.com/wallynm).

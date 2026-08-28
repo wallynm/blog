@@ -46,16 +46,14 @@ const config = {
 			base: ''
 		},
 		prerender: {
-		entries: [
-			'*',
-			'/api/posts/page/*',
-			'/blog/category/*/page/',
-			'/blog/category/*/page/*',
-			'/blog/category/page/',
-			'/blog/category/page/*',
-			'/blog/page/',
-			'/blog/page/*',
-		]
+			// Only '*' (every route without required params) is listed here. Routes
+			// with params export their own `entries()`, which is what makes them
+			// prerender; listing them as glob strings here just created literal
+			// directories named '*' in the build output.
+			entries: ['*'],
+			// Paginated routes have no entries until there are enough posts to
+			// need a second page. That is a valid state, not a build failure.
+			handleUnseenRoutes: 'ignore'
 		}
 	}
 };
