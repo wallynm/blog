@@ -93,6 +93,42 @@ opcionais: o card só não desenha a parte correspondente.
 Quando `url` e `repo` estão preenchidos, o card ganha os dois links no rodapé;
 com só um dos dois, o card inteiro vira o link.
 
+## Currículo na home
+
+A faixa de currículo no fim da home vem de `src/lib/resume.js`:
+
+```js
+export const resume = {
+	headline: 'Desenvolvedor de software',
+	summary: 'Um parágrafo curto, em primeira pessoa.',
+	links: { linkedin: '...', github: '...', pdf: '' },
+	experience: [
+		{
+			company: 'Empresa',
+			role: 'Cargo',
+			period: '2023 — agora',
+			location: 'Remoto',
+			description: 'O que você fez lá.',
+			tags: ['React', 'Node']
+		}
+	],
+	education: [{ school: '...', degree: '...', period: '...' }],
+	skills: [{ group: 'Frontend', items: ['React', 'Svelte'] }]
+}
+```
+
+**A seção só aparece quando `experience` tem pelo menos um item.** Com a lista
+vazia a home termina nos posts, sem faixa vazia no ar. `summary`, `education`,
+`skills`, `location`, `description` e `tags` são todos opcionais.
+
+A faixa ocupa a largura inteira da tela — por isso ela fica fora do
+`LayoutContent` no `+page.svelte`, com um container próprio por dentro para o
+conteúdo manter a mesma margem esquerda do resto do site.
+
+Para oferecer o PDF, coloque o arquivo em `static/` e aponte em `links.pdf`
+(ex.: `/curriculo.pdf`); o botão de download só aparece se esse campo estiver
+preenchido.
+
 ## Configuração do site
 
 `src/lib/config.js` concentra título, descrição, domínio, autor, posts por
@@ -107,6 +143,7 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 | `src/lib/posts/` | Os posts em Markdown |
 | `src/lib/config.js` | Configuração do site e do menu |
 | `src/lib/projects.js` | Os projetos exibidos na home |
+| `src/lib/resume.js` | Os dados do currículo na home |
 | `src/lib/assets/js/fetchPosts.ts` | Leitura, ordenação, filtro por categoria e paginação dos posts |
 | `src/lib/components/` | Header, footer, nav, listagem de posts, paginação |
 | `src/routes/` | Páginas e endpoints |

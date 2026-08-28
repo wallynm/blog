@@ -3,6 +3,7 @@
 	import { projects } from '$lib/projects'
 	import PostsList from '$lib/components/PostsList.svelte'
 	import ProjectCard from '$lib/components/ProjectCard.svelte'
+	import Resume from '$lib/components/Resume.svelte'
 	import LayoutContent from '$lib/components/layout/LayoutContent.svelte'
 
 	export let data
@@ -75,3 +76,5 @@
 		{/if}
 	</section>
 </LayoutContent>
+
+<Resume />
