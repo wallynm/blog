@@ -23,7 +23,7 @@
 	>
 		<slot />
 		{#if isCurrentPage}
-			<span class="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden="true"></span>
+			<span class="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-brand" aria-hidden="true"></span>
 		{/if}
 	</a>
 </li>

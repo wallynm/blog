@@ -31,7 +31,7 @@
 			{#each Array.from({ length: pagesAvailable }, (_, i) => i + 1) as page}
 				<li>
 					{#if page === currentPage}
-						<span class="{baseLink} border-accent bg-accent font-semibold text-canvas" aria-current="page">
+						<span class="{baseLink} border-brand bg-brand font-semibold text-on-brand" aria-current="page">
 							<span class="sr-only">Página atual, </span>{page}
 						</span>
 					{:else}

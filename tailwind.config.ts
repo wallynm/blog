@@ -19,11 +19,27 @@ export default {
 				accent: {
 					DEFAULT: token('accent'),
 					soft: token('accent-soft')
-				}
+				},
+				// #E63946 itself: fills and focus rings, never small text.
+				brand: token('brand'),
+				'on-brand': token('on-brand'),
+				ring: token('ring')
 			},
 			fontFamily: {
+				// Headings. Variable, with real character in the letterforms.
+				display: [
+					'Bricolage Grotesque Variable',
+					'ui-sans-serif',
+					'system-ui',
+					'Segoe UI',
+					'Helvetica Neue',
+					'Arial',
+					'sans-serif'
+				],
+				// Body copy, and the code face — both carried over from the
+				// original theme's font stack.
 				sans: [
-					'Atkinson Hyperlegible',
+					'Work Sans Variable',
 					'ui-sans-serif',
 					'system-ui',
 					'-apple-system',
@@ -33,13 +49,20 @@ export default {
 					'Arial',
 					'sans-serif'
 				],
-				mono: ['Fira Code', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace']
+				mono: [
+					'JetBrains Mono Variable',
+					'ui-monospace',
+					'SFMono-Regular',
+					'Menlo',
+					'Consolas',
+					'monospace'
+				]
 			},
 			maxWidth: {
 				content: '48rem',
 				wide: '64rem'
 			},
-			typography: () => ({
+			typography: ({ theme }) => ({
 				DEFAULT: {
 					css: {
 						'--tw-prose-body': 'rgb(var(--color-muted))',
@@ -51,7 +74,7 @@ export default {
 						'--tw-prose-bullets': 'rgb(var(--color-border))',
 						'--tw-prose-hr': 'rgb(var(--color-border))',
 						'--tw-prose-quotes': 'rgb(var(--color-text))',
-						'--tw-prose-quote-borders': 'rgb(var(--color-accent))',
+						'--tw-prose-quote-borders': 'rgb(var(--color-brand))',
 						'--tw-prose-captions': 'rgb(var(--color-faint))',
 						'--tw-prose-code': 'rgb(var(--color-text))',
 						'--tw-prose-th-borders': 'rgb(var(--color-border))',
@@ -72,6 +95,10 @@ export default {
 						'code::before': { content: 'none' },
 						'code::after': { content: 'none' },
 						':not(pre) > code': {
+							// Prism only styles code[class*='language-'], which inline
+							// code never has, so it needs the mono face set here.
+							fontFamily: theme('fontFamily.mono').join(', '),
+							fontSize: '0.875em',
 							backgroundColor: 'rgb(var(--color-accent-soft))',
 							borderRadius: '0.25rem',
 							padding: '0.15em 0.35em',

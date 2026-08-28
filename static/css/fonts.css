@@ -1,47 +1,94 @@
 /*
- * Self-hosted. The files live in static/fonts; before this, nothing declared
- * an @font-face for them, so they were never actually used.
+ * Self-hosted variable fonts.
  *
- * Atkinson Hyperlegible — Braille Institute (SIL OFL 1.1)
- * Fira Code — Nikita Prokopov (SIL OFL 1.1)
+ * The .woff2 files in static/fonts are the latin and latin-ext subsets taken
+ * verbatim from Fontsource 5.3.0 (@fontsource-variable/<family>), along with
+ * the unicode-range values below. To update: install the package, copy the
+ * matching files out of its files/ directory, and re-copy the ranges from its
+ * wght.css.
+ *
+ * They are vendored rather than imported from node_modules so the two faces
+ * used above the fold can be preloaded by a stable path in app.html.
+ *
+ * Only latin and latin-ext are shipped; the unicode-range on each rule means a
+ * visitor downloads just the subset their text needs.
+ *
+ * Bricolage Grotesque — Mathieu Triay / ANRT (SIL OFL 1.1)
+ * Work Sans — Wei Huang (SIL OFL 1.1)
+ * JetBrains Mono — JetBrains (SIL OFL 1.1)
  */
 
+/* Display face, used for headings. */
 @font-face {
-	font-family: 'Atkinson Hyperlegible';
-	src: url('/fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
-	font-weight: 400;
+	font-family: 'Bricolage Grotesque Variable';
+	src: url('/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');
+	font-weight: 200 800;
 	font-style: normal;
 	font-display: swap;
+	unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 
 @font-face {
-	font-family: 'Atkinson Hyperlegible';
-	src: url('/fonts/Atkinson-Hyperlegible-Italic-102a.woff2') format('woff2');
-	font-weight: 400;
+	font-family: 'Bricolage Grotesque Variable';
+	src: url('/fonts/bricolage-grotesque-latin-ext-wght-normal.woff2') format('woff2-variations');
+	font-weight: 200 800;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* Body face. */
+@font-face {
+	font-family: 'Work Sans Variable';
+	src: url('/fonts/work-sans-latin-wght-normal.woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+	font-family: 'Work Sans Variable';
+	src: url('/fonts/work-sans-latin-ext-wght-normal.woff2') format('woff2-variations');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+	font-family: 'Work Sans Variable';
+	src: url('/fonts/work-sans-latin-wght-italic.woff2') format('woff2-variations');
+	font-weight: 100 900;
 	font-style: italic;
 	font-display: swap;
+	unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 
 @font-face {
-	font-family: 'Atkinson Hyperlegible';
-	src: url('/fonts/Atkinson-Hyperlegible-Bold-102a.woff2') format('woff2');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Atkinson Hyperlegible';
-	src: url('/fonts/Atkinson-Hyperlegible-BoldItalic-102a.woff2') format('woff2');
-	font-weight: 700;
+	font-family: 'Work Sans Variable';
+	src: url('/fonts/work-sans-latin-ext-wght-italic.woff2') format('woff2-variations');
+	font-weight: 100 900;
 	font-style: italic;
 	font-display: swap;
+	unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* Code and the small mono labels. */
+@font-face {
+	font-family: 'JetBrains Mono Variable';
+	src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+	font-weight: 100 800;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 
 @font-face {
-	font-family: 'Fira Code';
-	src: url('/fonts/FiraCode-Regular.woff2') format('woff2');
-	font-weight: 400;
+	font-family: 'JetBrains Mono Variable';
+	src: url('/fonts/jetbrains-mono-latin-ext-wght-normal.woff2') format('woff2-variations');
+	font-weight: 100 800;
 	font-style: normal;
 	font-display: swap;
+	unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }

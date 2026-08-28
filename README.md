@@ -85,11 +85,11 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 | `src/routes/` | Páginas e endpoints |
 | `src/app.css` | Tokens de cor (light/dark) e estilos base |
 | `tailwind.config.ts` | Mapeia os tokens para classes do Tailwind |
-| `static/css/fonts.css` | `@font-face` das fontes locais |
+| `static/css/fonts.css` | `@font-face` das fontes locais (Fontsource, vendorizadas) |
 | `static/css/prism.css` | Tema do syntax highlighting |
 | `static/_headers` | Cache e headers de segurança da Cloudflare |
 | `wrangler.jsonc` | Config do deploy como Worker com assets estáticos |
-| `static/fonts/` | Atkinson Hyperlegible e Fira Code, servidas localmente |
+| `static/fonts/` | Bricolage Grotesque, Work Sans e JetBrains Mono (subsets latin) |
 
 ### Endpoints
 
@@ -105,29 +105,62 @@ Tudo é Tailwind. Não há CSS por componente nem folhas globais soltas — só
 `src/app.css` (tokens + base) e dois arquivos linkados no `app.html`:
 `fonts.css` (as `@font-face`) e `prism.css` (syntax highlighting).
 
-As cores vivem como variáveis CSS em `src/app.css`, uma vez para o tema claro
-e uma para o escuro:
+### Cores
+
+A paleta é a original do site ([coolors.co](https://coolors.co)):
+
+| | | |
+| --- | --- | --- |
+| `#E63946` vermelho | `#1D3557` marinho | `#457B9D` azul |
+| `#A8DAE5` céu | `#E6E8E4` osso | `#152030` tinta |
+
+Ela vira variáveis CSS em `src/app.css`, uma vez por tema:
 
 ```css
-:root      { --color-canvas: 250 250 249; --color-accent: 180 83 9;  ... }
-:root.dark { --color-canvas:  12  14  18; --color-accent: 251 191 36; ... }
+:root      { --color-canvas: 230 232 228; --color-text: 29 53 87;    ... }
+:root.dark { --color-canvas:  21  32  48; --color-text: 230 232 228; ... }
 ```
 
-O `tailwind.config.ts` expõe cada uma como uma classe (`bg-canvas`,
-`text-muted`, `border-border`, `text-accent`…), então os componentes não
-precisam de variantes `dark:` — trocar o tema troca as variáveis. Para mudar a
-identidade visual do site, mexa só nesses dois blocos.
+O `tailwind.config.ts` expõe cada uma como classe (`bg-canvas`, `text-muted`,
+`border-border`, `text-accent`…), então os componentes não têm nenhum `dark:` —
+trocar o tema troca as variáveis.
 
-Os valores atuais passam em WCAG AA (≥ 4.5:1) em todos os pares de texto e
-fundo, nos dois temas.
+Uma ressalva sobre o vermelho: `#E63946` mede 3.4:1 sobre o fundo claro e 3.9:1
+sobre o escuro, ou seja, reprova em WCAG AA como texto pequeno nos dois. Por
+isso ele vive em `--color-brand`, usado só como preenchimento (botões, barra da
+nav ativa) e anel de foco — onde vale a regra de 3:1 para não-texto. Links e
+labels usam `--color-accent`, o mesmo vermelho escurecido (`#C31925`) ou
+clareado (`#EC6A73`) conforme o tema.
 
-O tema é escolhido pelo `prefers-color-scheme` e pode ser fixado pelo botão no
-header, que grava em `localStorage`. Um script inline no `app.html` aplica a
-classe antes da primeira pintura, para não haver flash.
+Todos os pares texto/fundo passam AA nos dois temas — verificado medindo as
+cores computadas no DOM, não só a tabela de tokens.
 
-As larguras vêm de dois tokens: `max-w-wide` (o container da página, usado por
-header, footer e conteúdo) e `max-w-content` (a coluna de leitura). Header,
-listagem e artigo compartilham a mesma borda esquerda por causa disso.
+### Fontes
+
+Três variáveis, self-hosted em `static/fonts`, sem requisição para o Google:
+
+| Uso | Fonte |
+| --- | --- |
+| Títulos (`font-display`) | Bricolage Grotesque |
+| Corpo (`font-sans`) | Work Sans |
+| Código e labels (`font-mono`) | JetBrains Mono |
+
+Work Sans e JetBrains Mono vêm do tema original. Os `.woff2` são os subsets
+latin e latin-ext tirados do Fontsource 5.3.0; o cabeçalho de
+`static/css/fonts.css` explica como atualizá-los. O `unicode-range` em cada
+regra faz o visitante baixar só o subset de que precisa (~128 KB no total).
+
+### Larguras
+
+Dois tokens: `max-w-wide` (o container da página, usado por header, footer e
+conteúdo) e `max-w-content` (a coluna de leitura). Header, listagem e artigo
+compartilham a mesma borda esquerda por causa disso.
+
+### Tema claro/escuro
+
+Escolhido pelo `prefers-color-scheme` e fixável pelo botão no header, que grava
+em `localStorage`. Um script inline no `app.html` aplica a classe antes da
+primeira pintura, para não haver flash.
 
 ## Deploy na Cloudflare Pages
 
