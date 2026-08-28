@@ -85,6 +85,7 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 | `src/routes/` | Páginas e endpoints |
 | `static/css/` | CSS global (não há `<style>` por componente) |
 | `static/_headers` | Cache e headers de segurança da Cloudflare |
+| `wrangler.jsonc` | Config do deploy como Worker com assets estáticos |
 | `static/fonts/` | Atkinson Hyperlegible e Fira Code, servidas localmente |
 
 ### Endpoints
@@ -102,8 +103,23 @@ dispara um build automático. Não há workflow de CI neste repositório.
 
 ### Configuração do projeto (Cloudflare Dashboard)
 
-Em **Workers & Pages → Create → Pages → Connect to Git**, selecione este
-repositório e use:
+O dashboard oferece dois caminhos. Ambos funcionam; o repositório está
+preparado para os dois.
+
+**Workers (o caminho que a Cloudflare recomenda hoje)** — em
+**Workers & Pages → Create → Workers → Connect to Git**, selecione este
+repositório:
+
+| Campo | Valor |
+| --- | --- |
+| Build command | `pnpm build` |
+| Deploy command | `npx wrangler deploy` |
+| Production branch | `main` |
+
+O `wrangler.jsonc` na raiz cuida do resto: serve `./build` como assets
+estáticos, mantém as URLs sem `.html` e usa o `404.html` gerado no build.
+
+**Pages** — em **Workers & Pages → Create → Pages → Connect to Git**:
 
 | Campo | Valor |
 | --- | --- |
@@ -112,9 +128,10 @@ repositório e use:
 | Build output directory | `build` |
 | Production branch | `main` |
 
-O gerenciador de pacotes é detectado pelo `pnpm-lock.yaml`. A versão do Node vem
-do arquivo `.node-version` (22). Use a **build image v3**, que já traz pnpm 10 —
-a v2 traz pnpm 8 e não lê o formato atual do lockfile.
+Nos dois casos o gerenciador de pacotes é detectado pelo `pnpm-lock.yaml` e a
+versão do Node vem do `.node-version` (22). Se aparecer a opção de build image,
+use a **v3**: ela traz pnpm 10, enquanto a v2 traz pnpm 8 e não lê o formato
+atual do lockfile.
 
 ### Domínio
 
