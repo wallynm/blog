@@ -83,7 +83,10 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 | `src/lib/assets/js/fetchPosts.ts` | Leitura, ordenação, filtro por categoria e paginação dos posts |
 | `src/lib/components/` | Header, footer, nav, listagem de posts, paginação |
 | `src/routes/` | Páginas e endpoints |
-| `static/css/` | CSS global (não há `<style>` por componente) |
+| `src/app.css` | Tokens de cor (light/dark) e estilos base |
+| `tailwind.config.ts` | Mapeia os tokens para classes do Tailwind |
+| `static/css/fonts.css` | `@font-face` das fontes locais |
+| `static/css/prism.css` | Tema do syntax highlighting |
 | `static/_headers` | Cache e headers de segurança da Cloudflare |
 | `wrangler.jsonc` | Config do deploy como Worker com assets estáticos |
 | `static/fonts/` | Atkinson Hyperlegible e Fira Code, servidas localmente |
@@ -95,6 +98,36 @@ Esses valores são usados nas meta tags e no RSS, então mantenha-os atualizados
 - `/api/posts/count` — total de posts
 - `/api/posts/page/[page]` — posts paginados
 - `/sitemap.xml` — gerado no `postbuild`
+
+## Estilo
+
+Tudo é Tailwind. Não há CSS por componente nem folhas globais soltas — só
+`src/app.css` (tokens + base) e dois arquivos linkados no `app.html`:
+`fonts.css` (as `@font-face`) e `prism.css` (syntax highlighting).
+
+As cores vivem como variáveis CSS em `src/app.css`, uma vez para o tema claro
+e uma para o escuro:
+
+```css
+:root      { --color-canvas: 250 250 249; --color-accent: 180 83 9;  ... }
+:root.dark { --color-canvas:  12  14  18; --color-accent: 251 191 36; ... }
+```
+
+O `tailwind.config.ts` expõe cada uma como uma classe (`bg-canvas`,
+`text-muted`, `border-border`, `text-accent`…), então os componentes não
+precisam de variantes `dark:` — trocar o tema troca as variáveis. Para mudar a
+identidade visual do site, mexa só nesses dois blocos.
+
+Os valores atuais passam em WCAG AA (≥ 4.5:1) em todos os pares de texto e
+fundo, nos dois temas.
+
+O tema é escolhido pelo `prefers-color-scheme` e pode ser fixado pelo botão no
+header, que grava em `localStorage`. Um script inline no `app.html` aplica a
+classe antes da primeira pintura, para não haver flash.
+
+As larguras vêm de dois tokens: `max-w-wide` (o container da página, usado por
+header, footer e conteúdo) e `max-w-content` (a coluna de leitura). Header,
+listagem e artigo compartilham a mesma borda esquerda por causa disso.
 
 ## Deploy na Cloudflare Pages
 

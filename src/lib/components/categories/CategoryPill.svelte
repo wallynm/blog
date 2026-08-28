@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { getColorBasedIntoLength, getBackgroundBasedIntoLength } from '$lib/utils/categoryClassName';
-  export let name: string;
-  export let href: string;
-  
+	export let name: string;
+	export let href: string;
 </script>
 
 {#if name}
-  <a href={href} class="no-underline hover:underline jetbrains-mono-bold">
-    <span class="text-xl font-md me-2 px-2.5 py-0.5 {getColorBasedIntoLength(name)} {getBackgroundBasedIntoLength(name)}">{name}</span>
-  </a>
+	<a
+		{href}
+		class="inline-flex items-center rounded-full border border-border px-2.5 py-0.5
+			font-mono text-xs text-faint no-underline transition-colors
+			hover:border-accent hover:text-accent"
+	>
+		{name}
+	</a>
 {/if}

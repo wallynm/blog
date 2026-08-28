@@ -1,68 +1,47 @@
+/*
+ * Self-hosted. The files live in static/fonts; before this, nothing declared
+ * an @font-face for them, so they were never actually used.
+ *
+ * Atkinson Hyperlegible — Braille Institute (SIL OFL 1.1)
+ * Fira Code — Nikita Prokopov (SIL OFL 1.1)
+ */
 
-.jetbrains-mono-light {
-  font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: normal;
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('/fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
-.jetbrains-mono-regular {
-  font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('/fonts/Atkinson-Hyperlegible-Italic-102a.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
 }
 
-.jetbrains-mono-bold {
-  font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('/fonts/Atkinson-Hyperlegible-Bold-102a.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
 
-
-.work-sans-light {
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: normal;
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('/fonts/Atkinson-Hyperlegible-BoldItalic-102a.woff2') format('woff2');
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
 }
 
-
-.work-sans-regular {
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-.work-sans-bold {
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-}
-
-.quicksand-sans-light {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: normal;
-}
-
-
-.quicksand-sans-regular {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-.quicksand-sans-bold {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
+@font-face {
+	font-family: 'Fira Code';
+	src: url('/fonts/FiraCode-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }

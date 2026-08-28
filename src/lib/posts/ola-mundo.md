@@ -4,9 +4,6 @@ date: "2026-08-28"
 updated: "2026-08-28"
 categories:
   - "geral"
-coverImage: "/images/bg-post-0.png"
-coverWidth: 16
-coverHeight: 9
 excerpt: Primeiro post do blog — o que você vai encontrar por aqui e como esse site é construído.
 ---
 
@@ -27,10 +24,11 @@ date: "2026-08-28"
 updated: "2026-08-28"
 categories:
   - "geral"
-coverImage: "/images/bg-post-0.png"
+excerpt: Resumo curto que aparece na listagem.
+# Opcionais — se houver capa, a listagem e o post a exibem:
+coverImage: "/images/minha-capa.jpg"
 coverWidth: 16
 coverHeight: 9
-excerpt: Resumo curto que aparece na listagem.
 ---
 ```
 

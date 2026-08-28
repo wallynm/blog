@@ -1,25 +1,27 @@
 <!-- Renders posts listed by category, page 2 onwards -->
 <script>
+	import { siteTitle } from '$lib/config';
 	import PostsList from '$lib/components/PostsList.svelte'
 	import Pagination from '$lib/components/Pagination.svelte'
+	import PageHeading from '$lib/components/PageHeading.svelte'
 	import LayoutContent from '$lib/components/layout/LayoutContent.svelte'
-	import { siteDescription } from '$lib/config'
 
 	export let data
 </script>
 
 <svelte:head>
-	<title>Categoria: {data.category} - página {data.page}</title>
-	<meta data-key="description" name="description" content={siteDescription} />
+	<title>Categoria: {data.category}, página {data.page} — {siteTitle}</title>
 </svelte:head>
 
 <LayoutContent>
-	<h1 class="mb-12">Categoria: {data.category}</h1>
+	<div class="py-12 sm:py-16">
+		<PageHeading eyebrow="Categoria" title={data.category} subtitle="Página {data.page}" />
 
-	<PostsList posts={data.posts} />
-	<Pagination
-		currentPage={data.page}
-		totalPosts={data.totalPosts}
-		path="/blog/category/{data.category}/page"
-	/>
+		<PostsList posts={data.posts} />
+		<Pagination
+			currentPage={data.page}
+			totalPosts={data.totalPosts}
+			path="/blog/category/{data.category}/page"
+		/>
+	</div>
 </LayoutContent>

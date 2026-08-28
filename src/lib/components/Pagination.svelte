@@ -1,88 +1,56 @@
 <script lang="ts">
 	import { postsPerPage } from '$lib/config'
 
-	export let currentPage:number;
-	export let totalPosts
+	export let currentPage: number
+	export let totalPosts: number
 	export let path = '/blog/page'
-	
-	let pagesAvailable:number;
+
 	$: pagesAvailable = Math.ceil(totalPosts / postsPerPage)
 
-	const isCurrentPage = (page) => page == currentPage
-	
+	// Page 1 lives at the index route, not at /page/1.
+	const linkFor = (page: number) => (page === 1 ? path.replace(/\/page$/, '') : `${path}/${page}`)
 
-	const getClassnameNavigation = (page, type:'item'|'prev'|'next') => {
-		let className = 'relative block rounded bg-transparent px-3 py-1.5 text-sm text-surface transition duration-300 hover:bg-neutral-100 focus:bg-neutral-100 focus:text-primary-700 focus:outline-none active:bg-neutral-100 active:text-primary-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700  dark:focus:text-primary-500 dark:active:bg-neutral-700 dark:active:text-primary-500'
-
-		if(type == 'item' && isCurrentPage(page)) {
-			className += ' bg-neutral-100 text-primary-700'
-		}
-
-		if(type == 'prev' && currentPage == 1) {
-			className += ' pointer-events-none'
-		}
-
-		if(type == 'next' && currentPage == pagesAvailable) {
-			className += ' pointer-events-none'
-		}
-
-		return className;
-	}
-
-	const getNextPageLink = () => {
-		if(currentPage < pagesAvailable) {
-			return `${path}/${currentPage + 1}`
-		}
-		return '#'
-	}
-
-	const getPrevPageLink = () => {
-		if(currentPage > 1) {
-			return `${path}/${currentPage - 1}`
-		}
-		return '#'
-	}
+	const baseLink =
+		'inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-3 text-sm ' +
+		'no-underline transition-colors'
 </script>
 
-<!-- For some reason, the pagination wasn't re-rendering properly during navigation without the #key block -->
-{#key currentPage}
-	{#if pagesAvailable > 1}
-		<nav aria-label="Page navigation example">
-			<ul class="list-style-none flex">
-				<li>
-					<a
-						href="{getPrevPageLink()}"
-						class="{getClassnameNavigation(currentPage, 'prev')}"
-						>Previous</a
-					>
-				</li>
-
-				{#each Array.from({length: pagesAvailable}, (_, i) => i + 1) as page}
-				<li aria-current="{isCurrentPage(page)}">
-					<a
-						href="{path}/{page}"
-						class="{getClassnameNavigation(page, 'item')}"
-						>
-						{page}
-						<span
-						class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
-						>
-						{#if isCurrentPage(page)}
-							Current page: 
-						{:else}
-							Go to page 
-						{/if}
-						</span>
-						</a
-					>
-				</li>
-				{/each}
-				<li>
-					<a class="{getClassnameNavigation(currentPage, 'next')}" href="{getNextPageLink()}">
-						Next
+{#if pagesAvailable > 1}
+	<nav class="mt-10 flex max-w-content justify-center" aria-label="Paginação">
+		<ul class="flex flex-wrap items-center gap-2">
+			<li>
+				{#if currentPage > 1}
+					<a href={linkFor(currentPage - 1)} class="{baseLink} border-border text-muted hover:border-accent hover:text-accent" rel="prev">
+						Anterior
 					</a>
+				{:else}
+					<span class="{baseLink} border-transparent text-faint opacity-50" aria-hidden="true">Anterior</span>
+				{/if}
+			</li>
+
+			{#each Array.from({ length: pagesAvailable }, (_, i) => i + 1) as page}
+				<li>
+					{#if page === currentPage}
+						<span class="{baseLink} border-accent bg-accent font-semibold text-canvas" aria-current="page">
+							<span class="sr-only">Página atual, </span>{page}
+						</span>
+					{:else}
+						<a href={linkFor(page)} class="{baseLink} border-border text-muted hover:border-accent hover:text-accent">
+							<span class="sr-only">Ir para a página </span>{page}
+						</a>
+					{/if}
 				</li>
-			</ul>
-		</nav>
-	{/if}
-{/key}
+			{/each}
+
+			<li>
+				{#if currentPage < pagesAvailable}
+					<a href={linkFor(currentPage + 1)} class="{baseLink} border-border text-muted hover:border-accent hover:text-accent" rel="next">
+						Próxima
+					</a>
+				{:else}
+					<span class="{baseLink} border-transparent text-faint opacity-50" aria-hidden="true">Próxima</span>
+				{/if}
+			</li>
+		</ul>
+	</nav>
+{/if}
