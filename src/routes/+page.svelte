@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { siteTitle, siteDescription, siteAuthor } from '$lib/config'
 	import { projects } from '$lib/projects'
-	import PostsList from '$lib/components/PostsList.svelte'
+	import FeaturedPost from '$lib/components/FeaturedPost.svelte'
+	import PostsCompact from '$lib/components/PostsCompact.svelte'
 	import ProjectRow from '$lib/components/ProjectRow.svelte'
 	import Resume from '$lib/components/Resume.svelte'
 	import LayoutContent from '$lib/components/layout/LayoutContent.svelte'
 
 	export let data
 
-	const featured = projects.slice(0, 3)
+	const featuredProjects = projects.slice(0, 3)
+
+	// The newest post gets the large treatment; the next three sit under it in
+	// the compact list.
+	$: latestPost = data.posts?.[0]
+	$: olderPosts = data.posts?.slice(1, 4) ?? []
 </script>
 
 <svelte:head>
@@ -43,19 +49,36 @@
 		</div>
 	</section>
 
-	{#if featured.length}
-		<section class="border-b border-border py-16 sm:py-24">
-			<div class="mb-14 flex items-end justify-between gap-6">
-				<div>
-					<p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-						{featured.length} projetos
-					</p>
-					<h2 class="mt-3 text-3xl sm:text-4xl">No que tenho trabalhado</h2>
+	<section class="border-b border-border py-16 sm:py-20">
+		{#if latestPost}
+			<div class="mb-8 flex items-baseline justify-between gap-4">
+				<h2 class="text-3xl sm:text-4xl">Último post</h2>
+				<a href="/blog" class="whitespace-nowrap text-sm text-accent no-underline hover:underline">
+					Ver todos →
+				</a>
+			</div>
+
+			<FeaturedPost post={latestPost} />
+
+			{#if olderPosts.length}
+				<div class="mt-10">
+					<PostsCompact posts={olderPosts} />
 				</div>
+			{/if}
+		{:else}
+			<h2 class="text-3xl sm:text-4xl">Ainda não há posts por aqui</h2>
+			<p class="mt-3 text-muted">Volte em breve.</p>
+		{/if}
+	</section>
+
+	{#if featuredProjects.length}
+		<section class="border-b border-border py-16 sm:py-24">
+			<div class="mb-14">
+				<h2 class="text-3xl sm:text-4xl">Projetos pessoais</h2>
 			</div>
 
 			<ul class="flex flex-col gap-20 sm:gap-28">
-				{#each featured as project, i}
+				{#each featuredProjects as project, i}
 					<li>
 						<ProjectRow {...project} index={i + 1} />
 					</li>
@@ -64,21 +87,6 @@
 		</section>
 	{/if}
 
-	<section class="py-12 sm:py-16">
-		{#if data.posts?.length}
-			<div class="mb-6 flex items-baseline justify-between gap-4">
-				<h2 class="text-2xl">Últimos posts</h2>
-				<a href="/blog" class="whitespace-nowrap text-sm text-accent no-underline hover:underline">
-					Ver todos →
-				</a>
-			</div>
-
-			<PostsList posts={data.posts} />
-		{:else}
-			<h2 class="text-2xl">Ainda não há posts por aqui</h2>
-			<p class="mt-2 text-muted">Volte em breve.</p>
-		{/if}
-	</section>
 </LayoutContent>
 
 <Resume />
