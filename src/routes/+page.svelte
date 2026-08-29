@@ -2,7 +2,7 @@
 	import { siteTitle, siteDescription, siteAuthor } from '$lib/config'
 	import { projects } from '$lib/projects'
 	import PostsList from '$lib/components/PostsList.svelte'
-	import ProjectCard from '$lib/components/ProjectCard.svelte'
+	import ProjectRow from '$lib/components/ProjectRow.svelte'
 	import Resume from '$lib/components/Resume.svelte'
 	import LayoutContent from '$lib/components/layout/LayoutContent.svelte'
 
@@ -44,16 +44,20 @@
 	</section>
 
 	{#if featured.length}
-		<section class="border-b border-border py-12 sm:py-16">
-			<div class="mb-6">
-				<h2 class="text-2xl">Projetos</h2>
-				<p class="mt-2 text-muted">No que tenho trabalhado ultimamente.</p>
+		<section class="border-b border-border py-16 sm:py-24">
+			<div class="mb-14 flex items-end justify-between gap-6">
+				<div>
+					<p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+						{featured.length} projetos
+					</p>
+					<h2 class="mt-3 text-3xl sm:text-4xl">No que tenho trabalhado</h2>
+				</div>
 			</div>
 
-			<ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-				{#each featured as project}
-					<li class="flex">
-						<ProjectCard {...project} />
+			<ul class="flex flex-col gap-20 sm:gap-28">
+				{#each featured as project, i}
+					<li>
+						<ProjectRow {...project} index={i + 1} />
 					</li>
 				{/each}
 			</ul>

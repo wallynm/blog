@@ -14,15 +14,6 @@
  */
 export const projects = [
 	{
-		name: 'Cluvia',
-		description:
-			'Jogo de puzzle diário em 3D: encontre os itens roubados escondidos numa cidade isométrica, com um conjunto novo a cada dia.',
-		url: 'https://cluvia.app',
-		repo: '',
-		tags: ['Three.js', 'React Three Fiber'],
-		image: '/images/projetos/cluvia.webp'
-	},
-	{
 		name: 'Tessel',
 		description:
 			'Plataforma de IA em SaaS para storytelling de RPG de mesa: transcreve e resume as sessões, rastreia NPCs e eventos, e responde perguntas sobre a lore da campanha.',
@@ -32,6 +23,15 @@ export const projects = [
 		image: '/images/projetos/tessel.webp',
 		// O site do Tessel tem tema claro e escuro; o card acompanha o do blog.
 		imageLight: '/images/projetos/tessel-light.webp'
+	},
+	{
+		name: 'Cluvia',
+		description:
+			'Jogo de puzzle diário em 3D: encontre os itens roubados escondidos numa cidade isométrica, com um conjunto novo a cada dia.',
+		url: 'https://cluvia.app',
+		repo: '',
+		tags: ['Three.js', 'React Three Fiber'],
+		image: '/images/projetos/cluvia.webp'
 	},
 	{
 		name: 'Daimon',

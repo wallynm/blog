@@ -94,7 +94,9 @@ npx sharp-cli -i original.png -o . resize 1200 --withoutEnlargement \
 
 `imageLight` é opcional. Quando preenchido, `image` é usada no tema escuro e
 `imageLight` no claro — útil quando o produto capturado também tem os dois
-temas. As duas são baixadas, o que só compensa porque são leves.
+temas. As duas tags são renderizadas e alternadas por CSS, mas a escondida é
+`display:none` + `loading="lazy"`, então o navegador não busca o arquivo: só a
+variante do tema ativo trafega.
 
 Enquanto `image` estiver vazio (ou apontar para um arquivo que não existe), o
 card mostra um placeholder listrado no lugar — dá para publicar um projeto antes
