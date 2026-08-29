@@ -37,7 +37,9 @@
 				<p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Currículo</p>
 				<h2 class="mt-3 text-3xl sm:text-4xl">{siteAuthor}</h2>
 				{#if resume.headline}
-					<p class="mt-2 font-mono text-sm text-faint">{resume.headline}</p>
+					<p class="mt-2 font-mono text-sm text-faint">
+						{resume.location ? `${resume.headline} · ${resume.location}` : resume.headline}
+					</p>
 				{/if}
 				{#if resume.summary}
 					<p class="mt-5 max-w-content text-lg text-muted">{resume.summary}</p>
@@ -117,6 +119,22 @@
 						</div>
 					{/if}
 
+					{#if resume.languages?.length}
+						<div>
+							<h3 class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-faint">
+								Idiomas
+							</h3>
+							<ul class="flex flex-col gap-1.5">
+								{#each resume.languages as lang}
+									<li class="flex items-baseline justify-between gap-3 text-sm">
+										<span class="text-text">{lang.name}</span>
+										<span class="font-mono text-xs text-faint">{lang.level}</span>
+									</li>
+								{/each}
+							</ul>
+						</div>
+					{/if}
+
 					{#if resume.education?.length}
 						<div>
 							<h3 class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-faint">
@@ -144,6 +162,15 @@
 									no-underline transition-opacity hover:opacity-90"
 							>
 								Baixar PDF
+							</a>
+						{/if}
+						{#if resume.links?.email}
+							<a
+								href="mailto:{resume.links.email}"
+								class="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-muted
+									no-underline transition-colors hover:border-accent hover:text-accent"
+							>
+								E-mail
 							</a>
 						{/if}
 						{#if resume.links?.linkedin}
