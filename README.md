@@ -278,20 +278,32 @@ atual do lockfile.
 
 ### Domínio
 
-Em **Custom domains**, adicione `wallynm.dev` (e `www.wallynm.dev`, se quiser).
-Se o domínio já estiver numa zona da Cloudflare, os registros de DNS são criados
-automaticamente; se estiver em outro provedor, a Cloudflare mostra o `CNAME` a
-apontar.
+O domínio está declarado no `wrangler.jsonc` como Custom Domain:
 
-⚠️ Antes de apontar o domínio, confira a zona de DNS e remova o que sobrou do
-GitHub Pages, se ainda existir: os registros `A` para `185.199.108.153`,
-`185.199.109.153`, `185.199.110.153` e `185.199.111.153`, e o `CNAME` de `www`
-apontando para `wallynm.github.io`. Enquanto eles existirem, parte do tráfego
-pode continuar indo para o host antigo.
+```jsonc
+"routes": [{ "pattern": "wallynm.dev", "custom_domain": true }]
+```
 
-Com o domínio já servindo pela Cloudflare, dá para desativar o GitHub Pages em
-**Settings → Pages** do repositório. O workflow que publicava lá já foi removido
-neste commit, junto com o arquivo `CNAME`.
+Custom Domain significa que o Worker **é** a origem do hostname: no deploy a
+Cloudflare cria o registro DNS e emite o certificado sozinha. Não há registro
+para adicionar à mão nem certificado para gerenciar.
+
+Dois pré-requisitos:
+
+1. `wallynm.dev` precisa ser uma zona ativa na mesma conta Cloudflare.
+2. O hostname não pode ter um registro `CNAME` existente — a Cloudflare recusa
+   anexar um Custom Domain por cima de um. Se sobrou algo do GitHub Pages na
+   zona, remova antes: os `A` para `185.199.108.153`, `185.199.109.153`,
+   `185.199.110.153` e `185.199.111.153`, e o `CNAME` de `www` apontando para
+   `wallynm.github.io`.
+
+O `www` não é anexado. Se quiser que ele funcione, o caminho mais limpo é uma
+Redirect Rule na zona mandando `www.wallynm.dev/*` para `https://wallynm.dev/$1`
+— assim não existe conteúdo duplicado em dois hostnames.
+
+Com o domínio servindo pela Cloudflare, dá para desativar o GitHub Pages em
+**Settings → Pages** do repositório. O workflow que publicava lá já foi removido,
+junto com o arquivo `CNAME`.
 
 ### Headers e cache
 

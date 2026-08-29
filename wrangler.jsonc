@@ -3,6 +3,21 @@
 	"name": "wallynm-blog",
 	"compatibility_date": "2026-08-28",
 
+	// Custom Domain: the Worker becomes the origin for the hostname, and
+	// Cloudflare creates the DNS record and the certificate on deploy — no
+	// manual DNS entry, no cert management.
+	//
+	// Requires wallynm.dev to be an active zone in the same Cloudflare account,
+	// and the hostname must not already have a CNAME record: Cloudflare refuses
+	// to attach a Custom Domain over one. Clear any leftover GitHub Pages
+	// records first.
+	"routes": [
+		{
+			"pattern": "wallynm.dev",
+			"custom_domain": true
+		}
+	],
+
 	// Static-assets-only Worker: there is no server code, so no "main" entry.
 	// The build is fully prerendered by @sveltejs/adapter-static.
 	"assets": {
