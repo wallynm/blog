@@ -1,6 +1,9 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "wallynm-blog",
+	// Must match the Worker the dashboard created for this repo. A different
+	// name here would deploy to a second, separate Worker — and the Custom
+	// Domain below is attached to this one.
+	"name": "blog",
 	"compatibility_date": "2026-08-28",
 
 	// Custom Domain: the Worker becomes the origin for the hostname, and
