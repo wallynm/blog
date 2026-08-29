@@ -1,118 +1,109 @@
-/**
- * What follows is all syntax highlighting, based on the Dracula theme by Zeno Rocha
+/*
+ * Syntax highlighting for mdsvex/Prism output.
+ *
+ * The palette is driven by CSS variables so the same rules serve both themes;
+ * the block chrome (background, border, radius) comes from the typography
+ * plugin config in tailwind.config.ts.
  */
 
- code[class*="language-"],
- pre[class*="language-"] {
-	 color: #f8f8f2;
-	 background: none;
-	 text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-	 text-align: left;
-	 white-space: pre;
-	 word-spacing: normal;
-	 word-break: normal;
-	 word-wrap: normal;
-	 line-height: 1.5;
-	 -moz-tab-size: 4;
-	 -o-tab-size: 4;
-	 tab-size: 4;
-	 -webkit-hyphens: none;
-	 -moz-hyphens: none;
-	 -ms-hyphens: none;
-	 hyphens: none;
- }
- 
- /* Code blocks */
- pre[class*="language-"] {
-	 padding: 1em;
-	 margin: 2rem 0;
-	 overflow: auto;
-	 border-radius: 0.3em;
- }
- 
- :not(pre) > code[class*="language-"],
- pre[class*="language-"] {
-	 background: #282a36;
- }
- 
- /* Inline code */
- :not(pre) > code[class*="language-"] {
-	 padding: .1em;
-	 border-radius: .3em;
-	 white-space: normal;
- }
- 
- .token.comment,
- .token.prolog,
- .token.doctype,
- .token.cdata {
-	 color: #6272a4;
- }
- 
- .token.punctuation {
-	 color: #f8f8f2;
- }
- 
- .namespace {
-	 opacity: .7;
- }
- 
- .token.property,
- .token.tag,
- .token.constant,
- .token.symbol,
- .token.deleted {
-	 color: #ff79c6;
- }
- 
- .token.boolean,
- .token.number {
-	 color: #bd93f9;
- }
- 
- .token.selector,
- .token.attr-name,
- .token.string,
- .token.char,
- .token.builtin,
- .token.inserted {
-	 color: #50fa7b;
- }
- 
- .token.operator,
- .token.entity,
- .token.url,
- .language-css .token.string,
- .style .token.string,
- .token.variable {
-	 color: #f8f8f2;
- }
- 
- .token.atrule,
- .token.attr-value,
- .token.function,
- .token.class-name {
-	 color: #f1fa8c;
- }
- 
- .token.keyword {
-	 color: #8be9fd;
- }
- 
- .token.regex,
- .token.important {
-	 color: #ffb86c;
- }
- 
- .token.important,
- .token.bold {
-	 font-weight: bold;
- }
- 
- .token.italic {
-	 font-style: italic;
- }
- 
- .token.entity {
-	 cursor: help;
- }
+:root {
+	--code-comment: #5C7183;
+	--code-punctuation: #4F6B85;
+	--code-keyword: #C31925; /* the palette red */
+	--code-string: #1F6F54;
+	--code-function: #2C5F86; /* #457B9D, darkened to read on white */
+	--code-number: #8A4B8F;
+	--code-variable: #1D3557; /* navy */
+}
+
+:root.dark {
+	--code-comment: #7994A8;
+	--code-punctuation: #8FB4C9;
+	--code-keyword: #EC6A73; /* the palette red */
+	--code-string: #8FD9B6;
+	--code-function: #A8DAE5; /* the palette sky */
+	--code-number: #D9A7E0;
+	--code-variable: #C8DCE8;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+	color: rgb(var(--color-text));
+	background: none;
+	font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 0.875em;
+	line-height: 1.7;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	tab-size: 2;
+	hyphens: none;
+}
+
+pre[class*='language-'] {
+	padding: 1.15rem 1.25rem;
+	overflow-x: auto;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: var(--code-comment);
+	font-style: italic;
+}
+
+.token.punctuation {
+	color: var(--code-punctuation);
+}
+
+.token.tag,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule,
+.token.rule {
+	color: var(--code-keyword);
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex {
+	color: var(--code-string);
+}
+
+.token.function,
+.token.class-name {
+	color: var(--code-function);
+}
+
+.token.number,
+.token.boolean,
+.token.constant,
+.token.symbol {
+	color: var(--code-number);
+}
+
+.token.property,
+.token.attr-name,
+.token.variable,
+.token.parameter {
+	color: var(--code-variable);
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+	color: rgb(var(--color-muted));
+}
+
+.token.bold {
+	font-weight: 700;
+}
+
+.token.italic {
+	font-style: italic;
+}

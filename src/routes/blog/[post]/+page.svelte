@@ -1,62 +1,84 @@
-<!-- This file renders each individual blog post for reading. Be sure to update the svelte:head below -->
+<!-- Renders a single blog post. -->
 <script lang="ts">
-	import { getBackgroundBasedIntoLength } from '$lib/utils/categoryClassName.js';
-	import CategoriesPostList from "$lib/components/categories/CategoriesPostList.svelte";
+	import CategoriesPostList from '$lib/components/categories/CategoriesPostList.svelte';
 	import LayoutContent from '$lib/components/layout/LayoutContent.svelte';
+	import PostDate from '$lib/components/PostDate.svelte';
+	import { siteTitle, siteLink } from '$lib/config';
+
 	export let data;
-	export let test:string;
 
-	console.info(test)
+	$: ({ title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } = data.meta);
+	$: ({ PostContent } = data);
 
-	const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
-		data.meta;
-	const { PostContent } = data;
-
-	let img = 'bg-post-6.png';
+	$: absoluteCover = coverImage ? new URL(coverImage, siteLink).href : '';
 </script>
 
 <svelte:head>
-	<!-- Be sure to add your image files and un-comment the lines below -->
-	<title>{title}</title>
+	<title>{title} — {siteTitle}</title>
 	<meta data-key="description" name="description" content={excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={title} />
-	<meta name="twitter:title" content={title} />
 	<meta property="og:description" content={excerpt} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={excerpt} />
-	<!-- <meta property="og:image" content="https://yourdomain.com/image_path" /> -->
-	<meta property="og:image:width" content={coverWidth} />
-	<meta property="og:image:height" content={coverHeight} />
-	<!-- <meta name="twitter:image" content="https://yourdomain.com/image_path" /> -->
+	{#if absoluteCover}
+		<meta property="og:image" content={absoluteCover} />
+		<meta property="og:image:width" content={coverWidth} />
+		<meta property="og:image:height" content={coverHeight} />
+		<meta name="twitter:image" content={absoluteCover} />
+	{/if}
 </svelte:head>
 
+<article>
+	<header class="border-b border-border">
+		<LayoutContent>
+			<div class="py-12 sm:py-16">
+				{#if categories?.length}
+					<p class="mb-4 font-mono text-xs uppercase tracking-wider text-accent">
+						{categories[0]}
+					</p>
+				{/if}
 
-<div class="-mb-4 md:-mb-6" style="height: 200px;">
-	<img
-		style="width: 100vw; object-fit: cover; height: 200px; z-index: -1; left:0px; right: 0px;
-		-webkit-mask-image: url(/images/{img});
-    mask-image: url(/images/{img});"
-		class="cover-image"
-		src={coverImage}
-		alt=""
-	/>
-</div>
-<!-- You might want to add an alt frontmatter attribute. If not, leaving alt blank here works, too. -->
+				<h1 class="max-w-content text-3xl sm:text-4xl md:text-5xl">{title}</h1>
 
+				{#if excerpt}
+					<p class="mt-5 max-w-content text-lg text-muted">{excerpt}</p>
+				{/if}
 
+				<div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-faint">
+					<PostDate date={date} prefix="Publicado em " />
+					{#if updated && updated !== date}
+						<span aria-hidden="true">·</span>
+						<PostDate date={updated} prefix="atualizado em " />
+					{/if}
+				</div>
+			</div>
+		</LayoutContent>
+	</header>
 
-<LayoutContent>
-	<section class="lg:-mx-20 ">
-		<div class="mb-4 relative">
-			<h1 class="inline font-normal	text-2xl p-2 box-decoration-clone md:text-5xl md:leading-normal lg:text-7xl lg:leading-tight {getBackgroundBasedIntoLength(categories[0])}">{title}</h1>
+	{#if coverImage}
+		<LayoutContent>
+			<img
+				src={coverImage}
+				alt=""
+				width={coverWidth}
+				height={coverHeight}
+				class="mt-10 aspect-[16/7] w-full rounded-xl object-cover"
+			/>
+		</LayoutContent>
+	{/if}
+
+	<LayoutContent>
+		<div class="prose prose-lg max-w-content py-12 sm:py-16">
+			<svelte:component this={PostContent} />
+			<CategoriesPostList {categories} />
 		</div>
-		<span class="text-sm jetbrains-mono-regular">
-			// Published {date} • Updated {updated}
-		</span>
-	</section>
 
-	<article class="prose dark:prose-invert prose-lg mt-24 mb-32">
-		<svelte:component this={PostContent} />
-		<CategoriesPostList categories={categories} />
-	</article>
-</LayoutContent>
+		<div class="pb-12">
+			<a href="/blog" class="text-sm text-accent no-underline hover:underline">
+				← Voltar para o blog
+			</a>
+		</div>
+	</LayoutContent>
+</article>

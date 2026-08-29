@@ -1,0 +1,32 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "wallynm-blog",
+	"compatibility_date": "2026-08-28",
+
+	// Custom Domain: the Worker becomes the origin for the hostname, and
+	// Cloudflare creates the DNS record and the certificate on deploy — no
+	// manual DNS entry, no cert management.
+	//
+	// The zone is already on Cloudflare's nameservers, but the apex still has a
+	// proxied record pointing at the old host. Cloudflare refuses to attach a
+	// Custom Domain over an existing record rather than overwriting it, so that
+	// record has to be deleted before the deploy that attaches this one.
+	"routes": [
+		{
+			"pattern": "wallynm.dev",
+			"custom_domain": true
+		}
+	],
+
+	// Static-assets-only Worker: there is no server code, so no "main" entry.
+	// The build is fully prerendered by @sveltejs/adapter-static.
+	"assets": {
+		"directory": "./build",
+
+		// Serves /about from about.html, so URLs stay extensionless.
+		"html_handling": "auto-trailing-slash",
+
+		// Falls back to the prerendered 404.html instead of a bare 404.
+		"not_found_handling": "404-page"
+	}
+}

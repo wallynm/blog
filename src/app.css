@@ -1,5 +1,100 @@
 @import './reset.css';
+
 @tailwind components;
 @tailwind utilities;
-@tailwind variants;
+
 @config "../tailwind.config.ts";
+
+@layer base {
+	/*
+	 * The palette is the site's original one (coolors.co), kept as-is where it
+	 * is readable and adjusted only where it is not:
+	 *
+	 *   #E63946 red   #1D3557 navy   #457B9D blue
+	 *   #A8DAE5 sky   #E6E8E4 bone   #152030 ink
+	 *
+	 * #E63946 measures 3.4:1 on the light background and 3.9:1 on the dark one,
+	 * so as small text it fails WCAG AA either way. It is kept for fills and
+	 * focus rings (--color-brand), where the 3:1 rule for non-text applies,
+	 * while links and labels use a darker or lighter red of the same hue.
+	 *
+	 * Channels are space-separated RGB so Tailwind's opacity modifiers
+	 * (bg-surface/50) work through <alpha-value>.
+	 */
+	:root {
+		--color-canvas: 230 232 228; /* #E6E8E4 bone */
+		--color-surface: 255 255 255;
+		--color-border: 199 211 216;
+		--color-text: 29 53 87; /* #1D3557 navy — 10.0:1 */
+		--color-muted: 58 76 94; /*           — 7.2:1 */
+		--color-faint: 79 107 133; /*         — 4.5:1 */
+		--color-accent: 195 25 37; /* red, darkened for text — 4.9:1 */
+		--color-brand: 222 28 43; /* fills; white on it     — 4.9:1 */
+		--color-on-brand: 255 255 255;
+		--color-ring: 230 57 70; /* #E63946 itself — 3.4:1, non-text only */
+		--color-accent-soft: 247 221 223;
+	}
+
+	:root.dark {
+		--color-canvas: 21 32 48; /* #152030 ink */
+		--color-surface: 26 39 57;
+		--color-border: 44 67 96; /* lifted #1D3557 */
+		--color-text: 230 232 228; /* #E6E8E4 bone  — 13.3:1 */
+		--color-muted: 168 218 229; /* #A8DAE5 sky  — 10.8:1 */
+		--color-faint: 143 180 201; /*              — 7.5:1 */
+		--color-accent: 236 106 115; /* red, lightened for text — 5.4:1 */
+		--color-brand: 236 106 115; /* fills; ink on it        — 5.4:1 */
+		--color-on-brand: 21 32 48;
+		--color-ring: 230 57 70; /* #E63946 itself — 3.9:1, non-text only */
+		--color-accent-soft: 42 32 48;
+	}
+
+	html {
+		/* reset.css sets line-height: 1; restore a readable default. */
+		line-height: 1.6;
+		-webkit-text-size-adjust: 100%;
+		scroll-behavior: smooth;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+
+	body {
+		@apply bg-canvas text-muted antialiased;
+		font-family: theme('fontFamily.sans');
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		@apply font-display text-text font-bold;
+		line-height: 1.2;
+		text-wrap: balance;
+	}
+
+	a {
+		color: inherit;
+		text-underline-offset: 0.2em;
+	}
+
+	:focus-visible {
+		@apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-canvas rounded-sm;
+	}
+
+	::selection {
+		@apply bg-brand/25 text-text;
+	}
+}
+
+@layer components {
+	/* Skips past the header straight to the article. Visible only on focus. */
+	.skip-link {
+		@apply sr-only;
+	}
+
+	.skip-link:focus {
+		@apply not-sr-only fixed left-4 top-4 z-50 rounded-md bg-brand px-4 py-2
+			font-semibold text-on-brand no-underline;
+	}
+}

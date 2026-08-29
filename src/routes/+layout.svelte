@@ -1,54 +1,61 @@
-<!-- This is the global layout file; it "wraps" every page on the site. (Or more accurately: is the parent component to every page component on the site.) -->
+<!-- Global layout: parent component to every page on the site. -->
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import mixpanel from 'mixpanel-browser';
-	import { navItems } from '$lib/config';
+	import { navItems, siteDescription } from '$lib/config';
 	import { preloadCode } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { currentPage, isMenuOpen } from '../lib/assets/js/store.js';
-	import { siteTitle, siteURL } from '$lib/config.js';
-	import "../app.css";
+	import '../app.css';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 
-
-	const transitionIn = { delay: 150, duration: 150 };
+	const transitionIn = { delay: 100, duration: 150 };
 	const transitionOut = { duration: 100 };
 
-	/**
-	 * Updates the global store with the current path. (Used for highlighting
-	 * the current page in the nav, but could be useful for other purposes.)
-	 **/
+	/** Used to highlight the current page in the nav. */
 	$: currentPage.set(data.path);
 
-	/**
-	 * This pre-fetches all top-level routes on the site in the background for faster loading.
-	 * https://kit.svelte.dev/docs/modules#$app-navigation-preloaddata
-	 *
-	 * Any route added in src/lib/config.js will be preloaded automatically. You can add your
-	 * own preloadData() calls here, too.
-	 **/
+	// Keeps the page behind the mobile overlay from scrolling under it.
+	$: if (typeof document !== 'undefined') {
+		document.body.style.overflow = $isMenuOpen ? 'hidden' : '';
+	}
+
 	onMount(() => {
-		mixpanel.init('282d4cca7905578d99de00196ed79943', {debug: true, track_pageview: true, persistence: 'localStorage'});
-		const navRoutes = navItems.map((item) => item.route);
-		preloadCode(...navRoutes);
+		mixpanel.init('282d4cca7905578d99de00196ed79943', {
+			debug: false,
+			track_pageview: true,
+			persistence: 'localStorage'
+		});
+
+		// Pre-fetches top-level routes in the background for faster navigation.
+		preloadCode(...navItems.map((item) => item.route));
 	});
 </script>
 
 <svelte:head>
+	<meta name="description" content={siteDescription} />
 </svelte:head>
 
-<div class="min-h-screen flex flex-col" class:open={$isMenuOpen}>
-	<Header class=""/>
-	<section>
-		{#key data.path}
-			<main id="main" class="items-center justify-center flex flex-col " tabindex="-1" in:fade|global={transitionIn} out:fade|global={transitionOut}>
-				<slot/>
-			</main>
-		{/key}
-	</section>
-	<Footer class="p-10 mt-auto border-t border-gray-200"/>
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<div class="flex min-h-screen flex-col">
+	<Header />
+
+	{#key data.path}
+		<main
+			id="main"
+			class="flex-1 focus:outline-none"
+			tabindex="-1"
+			in:fade|global={transitionIn}
+			out:fade|global={transitionOut}
+		>
+			<slot />
+		</main>
+	{/key}
+
+	<Footer />
 </div>

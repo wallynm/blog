@@ -1,43 +1,52 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    let theme:string = 'dark';
+	import { onMount } from 'svelte';
 
-    onMount(async () => {
-        theme = localStorage.theme;
-        const lightSwitches = document.querySelectorAll('.light-switch');
-        if (lightSwitches.length > 0) {
-            lightSwitches.forEach((lightSwitch, i) => {
-                if (localStorage.getItem('dark-mode') === 'true') {
-                    lightSwitch.checked = true;
-                }
-                lightSwitch.addEventListener('change', () => {
-                    const { checked } = lightSwitch;
-                    lightSwitches.forEach((el, n) => {
-                        if (n !== i) {
-                            el.checked = checked;
-                        }
-                    });
-                    theme = (checked) ? 'light' : 'dark';
-                    localStorage.theme = theme
-                    window.changeThemeMode(theme)
-                })
-            })
-        }
-    })
+	// Mirrors whatever the inline script in app.html already applied, so the
+	// button never contradicts the theme on screen.
+	let isDark = true;
 
+	onMount(() => {
+		isDark = document.documentElement.classList.contains('dark');
+	});
+
+	const toggle = () => {
+		isDark = !isDark;
+		const theme = isDark ? 'dark' : 'light';
+
+		try {
+			localStorage.setItem('theme', theme);
+		} catch (e) {
+			// Private mode: the toggle still applies for this page view.
+		}
+
+		window.changeThemeMode(theme);
+	};
 </script>
 
-<div class="flex flex-col justify-center ml-3">
-  <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" checked={theme === 'light'}>
-  <label class="relative cursor-pointer p-2" for="light-switch">
-      <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-          <path class="fill-slate-300" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z" />
-          <path class="fill-slate-400" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
-      </svg>
-      <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-          <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z" />
-          <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z" />
-      </svg>
-      <span class="sr-only">Switch to light / dark version</span>
-  </label>
-</div>
+<button
+	type="button"
+	on:click={toggle}
+	class="grid h-9 w-9 place-items-center rounded-lg border border-border text-muted
+		transition-colors hover:border-accent hover:text-accent"
+	aria-pressed={isDark}
+	title={isDark ? 'Mudar para o tema claro' : 'Mudar para o tema escuro'}
+>
+	<span class="sr-only">
+		{isDark ? 'Mudar para o tema claro' : 'Mudar para o tema escuro'}
+	</span>
+
+	{#if isDark}
+		<!-- Sun -->
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+			stroke-width="2" stroke-linecap="round" aria-hidden="true">
+			<circle cx="12" cy="12" r="4" />
+			<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+		</svg>
+	{:else}
+		<!-- Moon -->
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+			stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+		</svg>
+	{/if}
+</button>

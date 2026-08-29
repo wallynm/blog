@@ -1,21 +1,23 @@
+<script>
+	import LayoutContent from '$lib/components/layout/LayoutContent.svelte';
+</script>
+
 <svelte:head>
-	<title>About</title>
+	<title>Sobre</title>
 </svelte:head>
 
-# About
+<LayoutContent>
+<div class="prose prose-lg max-w-content py-12 sm:py-16">
 
-This is an example of how you can have _markdown_ in page content!
+# Sobre
 
-- How
-- **Cool**
-- Is _that_!?
+Olá! Sou o **Wallysson Nunes da Mota**, desenvolvedor de software.
 
-If you like, you can also import markdown into any Svelte page.
+Este é meu espaço para escrever sobre as coisas em que trabalho e sobre o que
+aprendo no caminho: desenvolvimento web, arquitetura, frontend e ferramentas.
 
-Anyway, you can find this file here:
+Você pode acompanhar os posts pelo [blog](/blog) ou pelo [feed RSS](/api/rss.xml),
+e me encontrar no [GitHub](https://github.com/wallynm).
 
-```
-src/routes/about/+page.md
-```
-
-Here's the [home link](/) if you wanna go back.
+</div>
+</LayoutContent>

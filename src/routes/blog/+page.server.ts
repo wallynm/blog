@@ -1,10 +1,8 @@
-import { fetchApiPosts, fetchApiPostsCount } from '$lib/modules/server';
+import fetchPosts from '$lib/assets/js/fetchPosts';
 import type { PageServerLoad } from './$types';
 
-
-export const load:PageServerLoad = async ({ url, fetch }) => {
-	const posts = await fetchApiPosts({ url, fetch });
-	const total = await fetchApiPostsCount({ url, fetch });
+export const load:PageServerLoad = async () => {
+	const { posts, total } = await fetchPosts();
 
 	return { posts, total }
 }
