@@ -288,18 +288,21 @@ Custom Domain significa que o Worker **é** a origem do hostname: no deploy a
 Cloudflare cria o registro DNS e emite o certificado sozinha. Não há registro
 para adicionar à mão nem certificado para gerenciar.
 
-Dois pré-requisitos:
+Estado da zona hoje (verificado por DNS): os nameservers já são da Cloudflare
+(`irena.ns.cloudflare.com`, `jimmy.ns.cloudflare.com`), e tanto `wallynm.dev`
+quanto `www` resolvem para IPs anycast da Cloudflare — ou seja, os dois já
+existem como registros **proxiados** na zona. Como estão atrás do proxy, o
+destino real não é visível de fora; é preciso abrir **DNS → Records** no painel
+para ver para onde apontam.
 
-1. `wallynm.dev` precisa ser uma zona ativa na mesma conta Cloudflare.
-2. O hostname não pode ter um registro `CNAME` existente — a Cloudflare recusa
-   anexar um Custom Domain por cima de um. Se sobrou algo do GitHub Pages na
-   zona, remova antes: os `A` para `185.199.108.153`, `185.199.109.153`,
-   `185.199.110.153` e `185.199.111.153`, e o `CNAME` de `www` apontando para
-   `wallynm.github.io`.
+Isso importa porque a Cloudflare **não sobrescreve** um registro existente ao
+criar um Custom Domain — ela recusa. Então o registro do apex precisa ser
+apagado antes do deploy que anexa o domínio. Depois disso a própria Cloudflare
+recria o registro, apontando para o Worker.
 
-O `www` não é anexado. Se quiser que ele funcione, o caminho mais limpo é uma
-Redirect Rule na zona mandando `www.wallynm.dev/*` para `https://wallynm.dev/$1`
-— assim não existe conteúdo duplicado em dois hostnames.
+O `www` não é anexado como Custom Domain. Servir o site nos dois hostnames
+duplicaria o conteúdo; o caminho limpo é apagar o registro de `www` e criar uma
+Redirect Rule mandando `www.wallynm.dev/*` para `https://wallynm.dev/$1`.
 
 Com o domínio servindo pela Cloudflare, dá para desativar o GitHub Pages em
 **Settings → Pages** do repositório. O workflow que publicava lá já foi removido,

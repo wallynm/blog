@@ -7,10 +7,10 @@
 	// Cloudflare creates the DNS record and the certificate on deploy — no
 	// manual DNS entry, no cert management.
 	//
-	// Requires wallynm.dev to be an active zone in the same Cloudflare account,
-	// and the hostname must not already have a CNAME record: Cloudflare refuses
-	// to attach a Custom Domain over one. Clear any leftover GitHub Pages
-	// records first.
+	// The zone is already on Cloudflare's nameservers, but the apex still has a
+	// proxied record pointing at the old host. Cloudflare refuses to attach a
+	// Custom Domain over an existing record rather than overwriting it, so that
+	// record has to be deleted before the deploy that attaches this one.
 	"routes": [
 		{
 			"pattern": "wallynm.dev",
