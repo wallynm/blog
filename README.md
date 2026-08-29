@@ -78,12 +78,23 @@ A home mostra os três primeiros itens de `src/lib/projects.js`:
 	url: 'https://cluvia.app',   // opcional
 	repo: '',                     // opcional
 	tags: ['svelte', 'cloudflare'],
-	image: '/images/projetos/cluvia.jpg'
+	image: '/images/projetos/cluvia.webp',
+	imageLight: ''            // opcional, ver abaixo
 }
 ```
 
-Os prints ficam em `static/images/projetos/`. Formato: 16:9, pelo menos 1200px
-de largura, `.jpg` ou `.png`.
+Os prints ficam em `static/images/projetos/`, em WebP, redimensionados para
+1200px de largura — o card exibe ~330px, então 1200 cobre telas retina de sobra
+e cada arquivo fica abaixo de 60KB. Para gerar:
+
+```bash
+npx sharp-cli -i original.png -o . resize 1200 --withoutEnlargement \
+  && npx sharp-cli -i original.png -o . webp --quality 80
+```
+
+`imageLight` é opcional. Quando preenchido, `image` é usada no tema escuro e
+`imageLight` no claro — útil quando o produto capturado também tem os dois
+temas. As duas são baixadas, o que só compensa porque são leves.
 
 Enquanto `image` estiver vazio (ou apontar para um arquivo que não existe), o
 card mostra um placeholder listrado no lugar — dá para publicar um projeto antes

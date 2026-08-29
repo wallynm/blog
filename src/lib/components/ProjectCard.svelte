@@ -5,6 +5,10 @@
 	export let repo = '';
 	export let tags: string[] = [];
 	export let image = '';
+	// Optional light-theme variant. When set, `image` is used in dark mode and
+	// this one in light. Both are small enough that loading the pair is cheaper
+	// than the JS it would take to pick one.
+	export let imageLight = '';
 
 	// A path that 404s would otherwise show a broken-image icon; fall back to
 	// the placeholder instead.
@@ -21,15 +25,35 @@
 >
 	<div class="relative aspect-[16/9] overflow-hidden border-b border-border">
 		{#if showImage}
-			<img
-				src={image}
-				alt="Captura de tela do projeto {name}"
-				loading="lazy"
-				decoding="async"
-				on:error={() => (failed = true)}
-				class="h-full w-full object-cover object-top transition-transform duration-300
-					group-hover:scale-[1.02]"
-			/>
+			{@const imgClass =
+				'h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]'}
+			{#if imageLight}
+				<img
+					src={imageLight}
+					alt="Captura de tela do projeto {name}"
+					loading="lazy"
+					decoding="async"
+					on:error={() => (failed = true)}
+					class="{imgClass} dark:hidden"
+				/>
+				<img
+					src={image}
+					alt=""
+					loading="lazy"
+					decoding="async"
+					on:error={() => (failed = true)}
+					class="{imgClass} hidden dark:block"
+				/>
+			{:else}
+				<img
+					src={image}
+					alt="Captura de tela do projeto {name}"
+					loading="lazy"
+					decoding="async"
+					on:error={() => (failed = true)}
+					class={imgClass}
+				/>
+			{/if}
 		{:else}
 			<!-- Placeholder until a screenshot is added. Deliberately reads as an
 			     empty slot rather than imitating a screenshot. -->

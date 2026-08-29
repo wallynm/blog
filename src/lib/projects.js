@@ -6,7 +6,11 @@
  * renders a styled placeholder instead of a broken one, so it is safe to add a
  * project before you have a screenshot for it.
  *
- * Recommended screenshot: 16:9, at least 1200px wide, .jpg or .png.
+ * `imageLight` is optional: when set, `image` is used in dark mode and this one
+ * in light. Only worth it when the captured product has both themes.
+ *
+ * Recommended screenshot: 16:9, at least 1200px wide. WebP keeps these well
+ * under 60KB each.
  */
 export const projects = [
 	{
@@ -16,8 +20,7 @@ export const projects = [
 		url: 'https://cluvia.app',
 		repo: '',
 		tags: ['Three.js', 'React Three Fiber'],
-		// Solte o arquivo em static/images/projetos/ e aponte aqui:
-		image: '' // '/images/projetos/cluvia.jpg'
+		image: '/images/projetos/cluvia.webp'
 	},
 	{
 		name: 'Tessel',
@@ -26,7 +29,9 @@ export const projects = [
 		url: 'https://www.tessel.app/br/',
 		repo: '',
 		tags: ['IA', 'SaaS', 'RPG'],
-		image: '' // '/images/projetos/tessel.jpg'
+		image: '/images/projetos/tessel.webp',
+		// O site do Tessel tem tema claro e escuro; o card acompanha o do blog.
+		imageLight: '/images/projetos/tessel-light.webp'
 	},
 	{
 		name: 'Daimon',
@@ -36,6 +41,6 @@ export const projects = [
 		// O repositório é privado; sem link enquanto for.
 		repo: '',
 		tags: ['Rust', 'Godot', 'Web'],
-		image: '' // '/images/projetos/daimon.jpg'
+		image: '/images/projetos/daimon.webp'
 	}
 ]
