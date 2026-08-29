@@ -12,30 +12,30 @@ export const projects = [
 	{
 		name: 'Cluvia',
 		description:
-			'Jogo de puzzle diário: encontre os itens roubados espalhados por uma cidade isométrica, um conjunto novo a cada dia.',
+			'Jogo de puzzle diário em 3D: encontre os itens roubados escondidos numa cidade isométrica, com um conjunto novo a cada dia.',
 		url: 'https://cluvia.app',
 		repo: '',
-		tags: ['jogo', 'puzzle'],
+		tags: ['Three.js', 'React Three Fiber'],
 		// Solte o arquivo em static/images/projetos/ e aponte aqui:
 		image: '' // '/images/projetos/cluvia.jpg'
 	},
 	{
 		name: 'Tessel',
 		description:
-			'Documentação de sessões de RPG com IA: transcreve, resume, rastreia NPCs e eventos, e responde perguntas sobre a lore da campanha.',
+			'Plataforma de IA em SaaS para storytelling de RPG de mesa: transcreve e resume as sessões, rastreia NPCs e eventos, e responde perguntas sobre a lore da campanha.',
 		url: 'https://www.tessel.app/br/',
 		repo: '',
-		tags: ['IA', 'RPG'],
+		tags: ['IA', 'SaaS', 'RPG'],
 		image: '' // '/images/projetos/tessel.jpg'
 	},
 	{
 		name: 'Daimon',
 		description:
-			'Engine de simulação em Rust, sem domínio embutido: necessidades, ações e entidades são registradas em runtime, então o mesmo binário roda de um ecossistema de floresta a uma cozinha cooperativa.',
+			'Engine de simulação escrita em Rust, sem domínio embutido: necessidades, ações e entidades são registradas em runtime. Tem ports para web e para a Godot.',
 		url: '',
 		// O repositório é privado; sem link enquanto for.
 		repo: '',
-		tags: ['Rust', 'simulação'],
+		tags: ['Rust', 'Godot', 'Web'],
 		image: '' // '/images/projetos/daimon.jpg'
 	}
 ]
