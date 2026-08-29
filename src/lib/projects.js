@@ -37,7 +37,7 @@ export const projects = [
 		name: 'Daimon',
 		description:
 			'Engine de simulação escrita em Rust, sem domínio embutido: necessidades, ações e entidades são registradas em runtime. Tem ports para web e para a Godot.',
-		url: '',
+		url: 'https://daimon.wallynm.dev',
 		// O repositório é privado; sem link enquanto for.
 		repo: '',
 		tags: ['Rust', 'Godot', 'Web'],
