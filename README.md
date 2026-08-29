@@ -262,6 +262,10 @@ repositório:
 O `wrangler.jsonc` na raiz cuida do resto: serve `./build` como assets
 estáticos, mantém as URLs sem `.html` e usa o `404.html` gerado no build.
 
+O `name` no `wrangler.jsonc` tem que bater com o nome do Worker criado no
+painel — hoje `blog`. Um nome diferente ali faz o `wrangler deploy` publicar
+num Worker separado, e o Custom Domain está anexado a este.
+
 **Pages** — em **Workers & Pages → Create → Pages → Connect to Git**:
 
 | Campo | Valor |
